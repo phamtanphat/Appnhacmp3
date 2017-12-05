@@ -6,7 +6,7 @@ package com.ptp.phamtanphat.appnhacmp3.Service;
 
 public class APIService {
 
-    private static final String Base_URL = "https://phatdroid94com.000webhostapp.com/";
+    private static final String Base_URL = "https://phatdroid94com.000webhostapp.com/Server/";
     public static Dataservice getService(){
         return APIRetrofitClient.getClient(Base_URL).create(Dataservice.class);
     }
