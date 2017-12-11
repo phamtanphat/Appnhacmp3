@@ -13,21 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:src="@drawable/customimageviewsong_banner"
+            android:background="@drawable/customimageviewsong_banner"
             android:id="@+id/imageviewbanner"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp" />
+            android:layout_marginTop="30dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_alignTop="@id/imageviewbanner"
             android:text="Lo yeu mat roi`"
             android:textStyle="bold"
             android:textColor="#fffefe"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:layout_toRightOf="@id/imageviewbanner"
             android:id="@+id/textvewtitlebannerbaihat"
             android:layout_width="wrap_content"
@@ -38,14 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="3dp">
+            android:layout_marginTop="7dp">
             <TextView
                 android:layout_marginRight="40dp"
                 android:id="@+id/textviewloibaihatbanner"
                 android:maxLines="2"
                 android:text="Chao ban den voi khoa hoc lap trinh android"
                 android:textColor="#f7f7f7"
-                android:textSize="17sp"
+                android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView

@@ -1,6 +1,6 @@
 package com.ptp.phamtanphat.appnhacmp3.Service;
 
-import com.ptp.phamtanphat.appnhacmp3.Model.Banner;
+import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ import retrofit2.http.GET;
 
 public interface Dataservice {
     @GET("songbanner.php")
-    Call<List<Banner>> GetDataBanner();
+    Call<List<Quangcao>> GetDataBanner();
 }

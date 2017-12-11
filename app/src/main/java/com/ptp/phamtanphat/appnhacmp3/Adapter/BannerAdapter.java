@@ -1,6 +1,7 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ptp.phamtanphat.appnhacmp3.Model.Banner;
+import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +21,9 @@ import java.util.ArrayList;
 
 public class BannerAdapter extends PagerAdapter {
     Context context;
-    ArrayList<Banner> arrayListbanner;
+    ArrayList<Quangcao> arrayListbanner;
 
-    public BannerAdapter(Context context, ArrayList<Banner> arrayListbanner) {
+    public BannerAdapter(Context context, ArrayList<Quangcao> arrayListbanner) {
         this.context = context;
         this.arrayListbanner = arrayListbanner;
     }
@@ -48,10 +49,10 @@ public class BannerAdapter extends PagerAdapter {
         TextView txttitlesongbanner = view.findViewById(R.id.textvewtitlebannerbaihat);
         TextView txtlyricsongbanner = view.findViewById(R.id.textviewloibaihatbanner);
 
-        Picasso.with(context).load(arrayListbanner.get(position).getHinhBaiHat()).into(imgbackgroundbanner);
-        Picasso.with(context).load(arrayListbanner.get(position).getHinhBaiHat()).into(imgsongbanner);
-        txtlyricsongbanner.setText(arrayListbanner.get(position).getLoiBaiHat());
-        txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
+        Picasso.with(context).load(arrayListbanner.get(position).getHinhanh()).into(imgbackgroundbanner);
+        Picasso.with(context).load(arrayListbanner.get(position).getHinhanh()).into(imgsongbanner);
+        txtlyricsongbanner.setText(arrayListbanner.get(position).getNodung());
+//        txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
         container.addView(view);
         return view;
     }

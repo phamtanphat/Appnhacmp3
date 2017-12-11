@@ -6,10 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
-import com.ptp.phamtanphat.appnhacmp3.Model.Banner;
+import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.ptp.phamtanphat.appnhacmp3.Service.APIService;
 import com.ptp.phamtanphat.appnhacmp3.Service.Dataservice;
@@ -32,7 +31,6 @@ public class Fragment_Banner extends android.app.Fragment {
     ViewPager viewPager;
     BannerAdapter bannerAdapter;
     CircleIndicator circleIndicator;
-    ArrayList<Banner> mangbanner = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -41,25 +39,24 @@ public class Fragment_Banner extends android.app.Fragment {
         viewPager = view.findViewById(R.id.viewpager);
         circleIndicator = view.findViewById(R.id.indicatordefault);
         GetData();
-        bannerAdapter = new BannerAdapter(getActivity(),mangbanner);
-        viewPager.setAdapter(bannerAdapter);
-        circleIndicator.setViewPager(viewPager);
+
         return view;
     }
 
     private void GetData() {
         Dataservice dataservice = APIService.getService();
-        Call<List<Banner>> listbanner = dataservice.GetDataBanner();
-        listbanner.enqueue(new Callback<List<Banner>>() {
+        Call<List<Quangcao>> listbanner = dataservice.GetDataBanner();
+        listbanner.enqueue(new Callback<List<Quangcao>>() {
             @Override
-            public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
-                ArrayList<Banner> banners = (ArrayList<Banner>) response.body();
-                mangbanner.addAll(banners);
-                bannerAdapter.notifyDataSetChanged();
+            public void onResponse(Call<List<Quangcao>> call, Response<List<Quangcao>> response) {
+                ArrayList<Quangcao> banners = (ArrayList<Quangcao>) response.body();
+                bannerAdapter = new BannerAdapter(getActivity(),banners);
+                viewPager.setAdapter(bannerAdapter);
+                circleIndicator.setViewPager(viewPager);
             }
 
             @Override
-            public void onFailure(Call<List<Banner>> call, Throwable t) {
+            public void onFailure(Call<List<Quangcao>> call, Throwable t) {
 
             }
         });
