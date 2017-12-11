@@ -1,6 +1,7 @@
-package com.ptp.phamtanphat.appnhacmp3.Activity;
+package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -39,7 +40,13 @@ public class Fragment_Banner extends android.app.Fragment {
         viewPager = view.findViewById(R.id.viewpager);
         circleIndicator = view.findViewById(R.id.indicatordefault);
         GetData();
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
 
+            }
+        };
         return view;
     }
 
@@ -53,6 +60,7 @@ public class Fragment_Banner extends android.app.Fragment {
                 bannerAdapter = new BannerAdapter(getActivity(),banners);
                 viewPager.setAdapter(bannerAdapter);
                 circleIndicator.setViewPager(viewPager);
+
             }
 
             @Override

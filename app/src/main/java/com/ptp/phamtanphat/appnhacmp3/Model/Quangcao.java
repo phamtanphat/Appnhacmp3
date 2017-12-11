@@ -17,6 +17,12 @@ public class Quangcao {
     @SerializedName("IdBaihat")
     @Expose
     private String idBaihat;
+    @SerializedName("TenBaiHat")
+    @Expose
+    private String tenBaiHat;
+    @SerializedName("HinhBaiHat")
+    @Expose
+    private String hinhBaiHat;
 
     public String getIdQuangcao() {
         return idQuangcao;
@@ -48,6 +54,22 @@ public class Quangcao {
 
     public void setIdBaihat(String idBaihat) {
         this.idBaihat = idBaihat;
+    }
+
+    public String getTenBaiHat() {
+        return tenBaiHat;
+    }
+
+    public void setTenBaiHat(String tenBaiHat) {
+        this.tenBaiHat = tenBaiHat;
+    }
+
+    public String getHinhBaiHat() {
+        return hinhBaiHat;
+    }
+
+    public void setHinhBaiHat(String hinhBaiHat) {
+        this.hinhBaiHat = hinhBaiHat;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.ShapeDrawable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +49,15 @@ public class BannerAdapter extends PagerAdapter {
         TextView txtlyricsongbanner = view.findViewById(R.id.textviewloibaihatbanner);
 
         Picasso.with(context).load(arrayListbanner.get(position).getHinhanh()).into(imgbackgroundbanner);
-        Picasso.with(context).load(arrayListbanner.get(position).getHinhanh()).into(imgsongbanner);
+        Picasso.with(context).load(arrayListbanner.get(position).getHinhBaiHat()).into(imgsongbanner);
         txtlyricsongbanner.setText(arrayListbanner.get(position).getNodung());
-//        txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
+        txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
+        imgplaybanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         container.addView(view);
         return view;
     }

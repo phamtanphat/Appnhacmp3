@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.ptp.phamtanphat.appnhacmp3.Activity.Fragment_Banner"
+        android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         />
