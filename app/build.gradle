@@ -29,6 +29,9 @@ dependencies {
     dependencies {
         compile 'me.relex:circleindicator:1.2.2@aar'
     }
+    dependencies {
+        compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+    }
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

@@ -7,7 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.eftimoff.viewpagertransformers.RotateDownTransformer;
+import com.eftimoff.viewpagertransformers.RotateUpTransformer;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.R;
@@ -32,6 +35,9 @@ public class Fragment_Banner extends android.app.Fragment {
     ViewPager viewPager;
     BannerAdapter bannerAdapter;
     CircleIndicator circleIndicator;
+    int currentItem;
+    Runnable runnable;
+    Handler handler;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -40,13 +46,7 @@ public class Fragment_Banner extends android.app.Fragment {
         viewPager = view.findViewById(R.id.viewpager);
         circleIndicator = view.findViewById(R.id.indicatordefault);
         GetData();
-        Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        };
         return view;
     }
 
@@ -59,7 +59,25 @@ public class Fragment_Banner extends android.app.Fragment {
                 ArrayList<Quangcao> banners = (ArrayList<Quangcao>) response.body();
                 bannerAdapter = new BannerAdapter(getActivity(),banners);
                 viewPager.setAdapter(bannerAdapter);
+
                 circleIndicator.setViewPager(viewPager);
+                handler = new Handler();
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        currentItem = viewPager.getCurrentItem();
+                        currentItem++;
+                        if (currentItem >= viewPager.getAdapter().getCount()){
+                            currentItem = 0;
+                        }
+                        viewPager.setCurrentItem(currentItem,true);
+                        handler.postDelayed(runnable,4500);
+
+
+                    }
+                };
+                handler.postDelayed(runnable,4500);
+
 
             }
 
