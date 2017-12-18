@@ -8,11 +8,19 @@
     tools:context="com.ptp.phamtanphat.appnhacmp3.Activity.MainActivity">
 
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Banner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        />
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <fragment
+                android:id="@+id/fragment"
+                android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+        </RelativeLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
