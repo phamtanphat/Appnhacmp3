@@ -3,6 +3,7 @@ package com.ptp.phamtanphat.appnhacmp3.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import retrofit2.Response;
  * Created by KhoaPhamPC on 20/11/2017.
  */
 
-public class Fragment_Banner extends android.app.Fragment {
+public class Fragment_Banner extends Fragment {
 
     View view;
     ViewPager viewPager;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageviewbackgroundplaylist"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+    <ImageView
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_alignBottom="@id/imageviewbackgroundplaylist"
+        android:id="@+id/imageviewplaylist"
+        android:scaleType="fitXY"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+    <TextView
+        android:id="@+id/textviewtenplaylist"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@id/imageviewplaylist"
+        android:layout_alignBottom="@id/imageviewplaylist"
+        android:text="Nhung bai hit cu"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/imageviewbuttonplaylist"
+        android:layout_alignRight="@id/imageviewbackgroundplaylist"
+        android:layout_alignBottom="@id/imageviewplaylist"
+        android:src="@drawable/iconplaybanner"
+        android:scaleType="fitXY"
+        android:layout_width="35dp"
+        android:layout_height="30dp" />
+
+</RelativeLayout>
