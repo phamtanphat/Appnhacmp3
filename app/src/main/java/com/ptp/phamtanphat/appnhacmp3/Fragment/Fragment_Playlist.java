@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
@@ -40,7 +41,6 @@ public class Fragment_Playlist extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_playlist,container,false);
-
         lvplaylist = view.findViewById(R.id.listviewplaylist);
         txttitleplaylist = view.findViewById(R.id.textviewtitleplaylist);
         GetData();

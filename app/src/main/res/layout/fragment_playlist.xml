@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <TextView
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        android:textColor="#050505"
-        android:textAlignment="center"
-        android:text="NHỊP ĐIỆU CẢM XÚC"
-        android:textSize="30sp"
         android:id="@+id/textviewtitleplaylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:text="NHỊP ĐIỆU CẢM XÚC"
+        android:gravity="center"
+        android:textColor="#3e3b3b"
+        android:textSize="30sp"/>
+
     <ListView
-        android:layout_below="@+id/textviewtitleplaylist"
         android:id="@+id/listviewplaylist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textviewtitleplaylist">
     </ListView>
+    <TextView
+        android:layout_below="@id/listviewplaylist"
+        android:paddingLeft="5dp"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/iconmoreplaylist"
+        android:textSize="17sp"
+        android:text="Xem thêm playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
