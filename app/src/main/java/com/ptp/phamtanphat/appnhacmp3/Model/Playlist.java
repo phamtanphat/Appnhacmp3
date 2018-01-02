@@ -5,49 +5,49 @@ import com.google.gson.annotations.SerializedName;
 
 public class Playlist {
 
-    @SerializedName("Id")
+    @SerializedName("IdPlaylist")
     @Expose
-    private String id;
-    @SerializedName("IdChuDe")
+    private String idPlaylist;
+    @SerializedName("Ten")
     @Expose
-    private String idChuDe;
-    @SerializedName("TenTheLoai")
+    private String ten;
+    @SerializedName("HinhPlaylist")
     @Expose
-    private String tenTheLoai;
-    @SerializedName("HinhTheLoai")
+    private String hinhPlaylist;
+    @SerializedName("Icon")
     @Expose
-    private String hinhTheLoai;
+    private String icon;
 
-    public String getId() {
-        return id;
+    public String getIdPlaylist() {
+        return idPlaylist;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdPlaylist(String idPlaylist) {
+        this.idPlaylist = idPlaylist;
     }
 
-    public String getIdChuDe() {
-        return idChuDe;
+    public String getTen() {
+        return ten;
     }
 
-    public void setIdChuDe(String idChuDe) {
-        this.idChuDe = idChuDe;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
-    public String getTenTheLoai() {
-        return tenTheLoai;
+    public String getHinhPlaylist() {
+        return hinhPlaylist;
     }
 
-    public void setTenTheLoai(String tenTheLoai) {
-        this.tenTheLoai = tenTheLoai;
+    public void setHinhPlaylist(String hinhPlaylist) {
+        this.hinhPlaylist = hinhPlaylist;
     }
 
-    public String getHinhTheLoai() {
-        return hinhTheLoai;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setHinhTheLoai(String hinhTheLoai) {
-        this.hinhTheLoai = hinhTheLoai;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
 }

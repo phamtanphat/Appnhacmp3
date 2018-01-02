@@ -10,17 +10,27 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <RelativeLayout
+            android:id="@+id/relaltive1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <fragment
-                android:id="@+id/fragment"
+                android:id="@+id/fragmentbanner"
                 android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
+            <fragment
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/fragmentbanner"
+                android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Playlist"
+                android:id="@+id/fragmentplaylist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </RelativeLayout>
+
     </ScrollView>
+
 
 
 </RelativeLayout>

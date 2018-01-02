@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:background="@drawable/customimageviewsong_banner"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/customimageviewsong_banner"
             android:id="@+id/imageviewbanner"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
