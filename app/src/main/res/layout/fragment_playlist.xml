@@ -3,7 +3,7 @@
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textviewtitleplaylist"
@@ -17,9 +17,10 @@
         android:textSize="30sp"/>
 
     <ListView
+        android:scrollbars="none"
         android:id="@+id/listviewplaylist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textviewtitleplaylist">
     </ListView>
     <TextView
@@ -30,5 +31,5 @@
         android:textSize="17sp"
         android:text="Xem thêm playlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 </RelativeLayout>
