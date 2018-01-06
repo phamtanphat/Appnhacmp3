@@ -24,6 +24,12 @@
         android:layout_below="@+id/textviewtitleplaylist">
     </ListView>
     <TextView
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:background="#d3d0d0"
         android:layout_below="@id/listviewplaylist"
         android:paddingLeft="5dp"
         android:drawablePadding="10dp"
