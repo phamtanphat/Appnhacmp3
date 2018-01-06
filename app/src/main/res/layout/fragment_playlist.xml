@@ -31,7 +31,7 @@
         android:textColor="#000000"
         android:background="#d3d0d0"
         android:layout_below="@id/listviewplaylist"
-        android:paddingLeft="5dp"
+        android:paddingLeft="7dp"
         android:drawablePadding="10dp"
         android:drawableLeft="@drawable/iconmoreplaylist"
         android:textSize="17sp"
