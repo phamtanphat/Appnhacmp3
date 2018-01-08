@@ -2,6 +2,7 @@ package com.ptp.phamtanphat.appnhacmp3.Service;
 
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
+import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
 
 import java.util.List;
 
@@ -18,5 +19,8 @@ public interface Dataservice {
 
     @GET("playlistforcurrentday.php")
     Call<List<Playlist>> GetPlaylistCurrentDay();
+
+    @GET("chudevatheloaitrongngay.php")
+    Call<Theloaitrongngay> GetCategoryMusic();
 
 }

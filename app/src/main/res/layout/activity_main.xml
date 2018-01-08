@@ -25,7 +25,11 @@
             android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragmentchudetheloai"
+            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_ChuDe_TheLoai_ToDay"/>
     </LinearLayout>
 
 </ScrollView>
