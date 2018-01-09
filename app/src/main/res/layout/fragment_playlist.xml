@@ -3,7 +3,7 @@
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textviewtitleplaylist"
@@ -17,25 +17,19 @@
         android:textSize="30sp"/>
 
     <ListView
-        android:scrollbars="none"
         android:id="@+id/listviewplaylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textviewtitleplaylist">
     </ListView>
     <TextView
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textColor="#000000"
-        android:background="#d3d0d0"
+        android:id="@+id/textviewviewmoreplaylist"
         android:layout_below="@id/listviewplaylist"
-        android:paddingLeft="7dp"
+        android:paddingLeft="5dp"
         android:drawablePadding="10dp"
         android:drawableLeft="@drawable/iconmoreplaylist"
         android:textSize="17sp"
         android:text="Xem thêm playlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -38,34 +38,37 @@ public class Fragment_Playlist extends Fragment {
     PlaylistAdapter playlistAdapter;
     ArrayList<Playlist> mangplaylist;
     View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_playlist,container,false);
+        view = inflater.inflate(R.layout.fragment_playlist, container, false);
         lvplaylist = view.findViewById(R.id.listviewplaylist);
         txttitleplaylist = view.findViewById(R.id.textviewtitleplaylist);
         GetData();
         return view;
     }
+
     private void GetData() {
         Dataservice dataservice = APIService.getService();
         Call<List<Playlist>> listplaylist = dataservice.GetPlaylistCurrentDay();
-       listplaylist.enqueue(new Callback<List<Playlist>>() {
-           @Override
-           public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
-               mangplaylist = (ArrayList<Playlist>) response.body();
-               playlistAdapter = new PlaylistAdapter(getActivity(),android.R.layout.simple_expandable_list_item_1,mangplaylist);
-               lvplaylist.setAdapter(playlistAdapter);
-               setListViewHeightBasedOnChildren(lvplaylist);
+        listplaylist.enqueue(new Callback<List<Playlist>>() {
+            @Override
+            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+                mangplaylist = (ArrayList<Playlist>) response.body();
+                playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, mangplaylist);
+                lvplaylist.setAdapter(playlistAdapter);
+                setListViewHeightBasedOnChildren(lvplaylist);
 
-           }
+            }
 
-           @Override
-           public void onFailure(Call<List<Playlist>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<List<Playlist>> call, Throwable t) {
 
-           }
-       });
+            }
+        });
     }
+
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
@@ -77,7 +80,7 @@ public class Fragment_Playlist extends Fragment {
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             if (listItem instanceof ViewGroup) {
-                listItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT));
+                listItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
             }
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
