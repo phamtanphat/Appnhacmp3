@@ -22,5 +22,4 @@ public interface Dataservice {
 
     @GET("chudevatheloaitrongngay.php")
     Call<Theloaitrongngay> GetCategoryMusic();
-
 }
