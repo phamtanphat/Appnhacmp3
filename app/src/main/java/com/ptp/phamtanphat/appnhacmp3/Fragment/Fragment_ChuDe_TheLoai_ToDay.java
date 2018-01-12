@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,10 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 for (int i = 0 ; i<(chuDeArrayList.size());i++){
+                    LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(200,160);
                     ImageView imageView = new ImageView(getActivity());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setLayoutParams(layoutParams);
                     Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
                     linearLayout.addView(imageView);
                 }
