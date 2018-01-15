@@ -47,7 +47,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chude_theloai_today,container,false);
+        view = inflater.inflate(R.layout.fragment_chude_theloai_today, container, false);
 
         relativeLayoutchudetheloai = view.findViewById(R.id.relativechudetheloai);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
@@ -55,7 +55,8 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
         GetData();
         return view;
     }
-    public void GetData(){
+
+    public void GetData() {
         Dataservice dataservice = APIService.getService();
         Call<Theloaitrongngay> theloaitrongngayCall = dataservice.GetCategoryMusic();
         theloaitrongngayCall.enqueue(new Callback<Theloaitrongngay>() {
@@ -71,23 +72,33 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(580,230);
-                layoutParams.setMargins(150,150,0,150);
+                LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(580, 250);
+                layout.setMargins(20,20,0,20);
 
-                for (int i = 0 ; i<(chuDeArrayList.size() + theLoaiArrayList.size());i++){
+                for (int i = 0; i < (chuDeArrayList.size()); i++) {
+                    CardView cardView = new CardView(getActivity());
+                    cardView.setRadius(10);
+                    ImageView imageView = new ImageView(getActivity());
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    if (chuDeArrayList.get(i).getHinhChuDe() != null) {
+                        Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
+                    }
+
+                    cardView.setLayoutParams(layout);
+                    cardView.addView(imageView);
+                    linearLayout.addView(cardView);
+                }
+                for (int j = 0; j < theLoaiArrayList.size(); j++) {
                     CardView cardView = new CardView(getActivity());
                     cardView.setRadius(10);
 
                     ImageView imageView = new ImageView(getActivity());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    if (chuDeArrayList.get(i).getHinhChuDe() != null){
 
-                        Picasso.with(getActivity()).load(chuDeArrayList.get(i ).getHinhChuDe()).into(imageView);
+                    if (theLoaiArrayList.get(j).getHinhTheLoai() != null) {
+                        Picasso.with(getActivity()).load(theLoaiArrayList.get(j).getHinhTheLoai()).into(imageView);
                     }
-                    if (theLoaiArrayList.get(i).getHinhTheLoai() != null){
-                        Picasso.with(getActivity()).load(theLoaiArrayList.get(i - 4).getHinhTheLoai()).into(imageView);
-                    }
-                    cardView.setLayoutParams(layoutParams);
+                    cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
                 }
