@@ -18,6 +18,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
@@ -84,10 +85,15 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     if (chuDeArrayList.get(i).getHinhChuDe() != null) {
                         Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
                     }
-
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
                 }
                 for (int j = 0; j < theLoaiArrayList.size(); j++) {
                     CardView cardView = new CardView(getActivity());
@@ -102,6 +108,13 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
                 }
                 horizontalScrollView.addView(linearLayout);
             }
