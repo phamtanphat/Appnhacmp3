@@ -32,6 +32,6 @@
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativechudetheloai">
-    </HorizontalScrollView>
+        android:layout_below="@+id/relativechudetheloai"
+        android:scrollbars="none"></HorizontalScrollView>
 </RelativeLayout>
