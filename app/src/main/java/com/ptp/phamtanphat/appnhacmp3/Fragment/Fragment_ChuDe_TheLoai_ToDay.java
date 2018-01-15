@@ -1,10 +1,16 @@
 package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Resources;
+import android.opengl.Matrix;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,13 +71,25 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                for (int i = 0 ; i<(chuDeArrayList.size());i++){
-                    LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(200,160);
+                LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(580,230);
+                layoutParams.setMargins(150,150,0,150);
+
+                for (int i = 0 ; i<(chuDeArrayList.size() + theLoaiArrayList.size());i++){
+                    CardView cardView = new CardView(getActivity());
+                    cardView.setRadius(10);
+
                     ImageView imageView = new ImageView(getActivity());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    imageView.setLayoutParams(layoutParams);
-                    Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
-                    linearLayout.addView(imageView);
+                    if (chuDeArrayList.get(i).getHinhChuDe() != null){
+
+                        Picasso.with(getActivity()).load(chuDeArrayList.get(i ).getHinhChuDe()).into(imageView);
+                    }
+                    if (theLoaiArrayList.get(i).getHinhTheLoai() != null){
+                        Picasso.with(getActivity()).load(theLoaiArrayList.get(i - 4).getHinhTheLoai()).into(imageView);
+                    }
+                    cardView.setLayoutParams(layoutParams);
+                    cardView.addView(imageView);
+                    linearLayout.addView(cardView);
                 }
                 horizontalScrollView.addView(linearLayout);
             }

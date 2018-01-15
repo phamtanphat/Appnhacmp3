@@ -23,13 +23,19 @@
         android:layout_below="@+id/textviewtitleplaylist">
     </ListView>
     <TextView
+        android:textColor="#0a0a0a"
+        android:layout_marginBottom="8dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="8dp"
+        android:background="#c9c7c7"
         android:id="@+id/textviewviewmoreplaylist"
         android:layout_below="@id/listviewplaylist"
         android:paddingLeft="5dp"
         android:drawablePadding="10dp"
         android:drawableLeft="@drawable/iconmoreplaylist"
-        android:textSize="17sp"
-        android:text="Xem thêm playlist"
+        android:textSize="19sp"
+        android:text="Xem thêm playlists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
