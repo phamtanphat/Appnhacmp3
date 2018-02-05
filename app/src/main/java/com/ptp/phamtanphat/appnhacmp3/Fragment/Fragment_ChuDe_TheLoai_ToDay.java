@@ -18,6 +18,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -44,7 +45,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
     View view;
     RelativeLayout relativeLayoutchudetheloai;
     HorizontalScrollView horizontalScrollView;
-
+    TextView txtxemthemchudetheloai;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
         relativeLayoutchudetheloai = view.findViewById(R.id.relativechudetheloai);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
-
+        txtxemthemchudetheloai = view.findViewById(R.id.textviewxemthem);
         GetData();
         return view;
     }
