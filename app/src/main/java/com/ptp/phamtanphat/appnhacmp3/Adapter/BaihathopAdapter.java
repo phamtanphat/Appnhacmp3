@@ -63,14 +63,7 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
             imgluothich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    if (like == false ){
-                        like = true;
-                        Toast.makeText(context, "Da thich", Toast.LENGTH_SHORT).show();
-                        imgluothich.setImageResource(R.drawable.iconloved);
-                    }else {
-                        Toast.makeText(context, "Ban da thich bai hat nay!!", Toast.LENGTH_SHORT).show();
-                    }
+                    imgluothich.setImageResource(R.drawable.iconloved);
                 }
             });
         }

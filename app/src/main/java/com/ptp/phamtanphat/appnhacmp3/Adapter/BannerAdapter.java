@@ -1,6 +1,7 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.squareup.picasso.Picasso;
@@ -55,7 +57,8 @@ public class BannerAdapter extends PagerAdapter {
         imgplaybanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+//                intent.putExtra("id")
             }
         });
         container.addView(view);

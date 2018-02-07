@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinatorlayout"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity">
+    <android.support.design.widget.AppBarLayout
+        android:fitsSystemWindows="true"
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbar"
+            android:layout_width="match_parent"
+            app:expandedTitleGravity="center"
+            app:expandedTitleMarginTop="150dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_launcher"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <View
+                android:background="#67848484"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <android.support.v7.widget.Toolbar
+                android:elevation="6dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:id="@+id/toolbardanhsach"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                app:layout_collapseMode="pin">
+
+            </android.support.v7.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/imageviewdanhsachcakhuc"
+                android:elevation="6dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginBottom="50dp"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        android:id="@+id/floatingactionbuttondanhsach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:scaleType="fitXY"
+        app:backgroundTint="@color/colorFloatingButton"
+        android:src="@drawable/iconfloatingactionbutton"
+        app:layout_anchor="@+id/appbarlayout"
+        app:layout_anchorGravity="bottom|center" />
+
+
+</android.support.design.widget.CoordinatorLayout>

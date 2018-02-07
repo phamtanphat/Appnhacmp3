@@ -1,17 +1,21 @@
 package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.PlaylistAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
@@ -59,6 +63,14 @@ public class Fragment_Playlist extends Fragment {
                 playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, mangplaylist);
                 lvplaylist.setAdapter(playlistAdapter);
                 setListViewHeightBasedOnChildren(lvplaylist);
+                lvplaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                        intent.putExtra("itemplaylist", mangplaylist.get(position));
+                        startActivity(intent);
+                    }
+                });
 
             }
 
