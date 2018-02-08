@@ -1,16 +1,14 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ptp.phamtanphat.appnhacmp3.Model.BaiHatThichNhat;
+import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.squareup.picasso.Picasso;
 
@@ -22,10 +20,10 @@ import java.util.ArrayList;
 
 public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.ViewHolder>{
     Context context;
-    ArrayList<BaiHatThichNhat> mangbaihathot;
+    ArrayList<Baihat> mangbaihathot;
     Boolean like = false;
 
-    public BaihathopAdapter(Context context, ArrayList<BaiHatThichNhat> mangbaihathot) {
+    public BaihathopAdapter(Context context, ArrayList<Baihat> mangbaihathot) {
         this.context = context;
         this.mangbaihathot = mangbaihathot;
     }
@@ -39,7 +37,7 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        BaiHatThichNhat baiHatThichNhat = mangbaihathot.get(position);
+        Baihat baiHatThichNhat = mangbaihathot.get(position);
         holder.txtten.setText(baiHatThichNhat.getTenbaihat());
         holder.txtcasi.setText(baiHatThichNhat.getCasi());
         Picasso.with(context).load(baiHatThichNhat.getHinhbaihat()).into(holder.imghinh);

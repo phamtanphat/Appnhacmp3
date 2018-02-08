@@ -50,6 +50,12 @@ public class Fragment_Playlist extends Fragment {
         lvplaylist = view.findViewById(R.id.listviewplaylist);
         txttitleplaylist = view.findViewById(R.id.textviewtitleplaylist);
         GetData();
+        txttitleplaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
     }
 

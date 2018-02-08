@@ -3,7 +3,7 @@ package com.ptp.phamtanphat.appnhacmp3.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BaiHatThichNhat {
+public class Baihat {
 
 @SerializedName("Idbaihat")
 @Expose

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="5dp">
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textviewdanhsachindex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:singleLine="true"
+            android:id="@+id/textviewdanhsachtenbaihat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/textviewdanhsachindex"
+            android:text="Toi la ai"
+            android:textColor="#282828"
+            android:textSize="20sp" />
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:id="@+id/textviewdanhsachtencasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textviewdanhsachtenbaihat"
+            android:layout_toRightOf="@id/textviewdanhsachindex"
+            android:text="Quach thanh danh"
+            android:textColor="#979797"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ptp.phamtanphat.appnhacmp3.Adapter.AlbumAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BaihathopAdapter;
-import com.ptp.phamtanphat.appnhacmp3.Model.Album;
-import com.ptp.phamtanphat.appnhacmp3.Model.BaiHatThichNhat;
+import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.ptp.phamtanphat.appnhacmp3.Service.APIService;
 import com.ptp.phamtanphat.appnhacmp3.Service.Dataservice;
@@ -48,11 +46,11 @@ public class Fragment_Bai_Hat_Hot extends Fragment {
 
     private void GetData() {
         Dataservice dataservice = APIService.getService();
-        Call<List<BaiHatThichNhat>> listCall = dataservice.GetBaiHatHot();
-        listCall.enqueue(new Callback<List<BaiHatThichNhat>>() {
+        Call<List<Baihat>> listCall = dataservice.GetBaiHatHot();
+        listCall.enqueue(new Callback<List<Baihat>>() {
             @Override
-            public void onResponse(Call<List<BaiHatThichNhat>> call, Response<List<BaiHatThichNhat>> response) {
-                ArrayList<BaiHatThichNhat> mangbaihathot = (ArrayList<BaiHatThichNhat>) response.body();
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                ArrayList<Baihat> mangbaihathot = (ArrayList<Baihat>) response.body();
                 baihathopAdapter = new BaihathopAdapter(getActivity(),mangbaihathot);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -61,7 +59,7 @@ public class Fragment_Bai_Hat_Hot extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<BaiHatThichNhat>> call, Throwable t) {
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
 
             }
         });

@@ -11,19 +11,20 @@
         android:fitsSystemWindows="true"
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:layout_height="300dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
+
             android:id="@+id/collapsingtoolbar"
             android:layout_width="match_parent"
-            app:expandedTitleGravity="center"
-            app:expandedTitleMarginTop="150dp"
+            app:expandedTitleGravity="center|bottom"
+            app:expandedTitleMarginBottom="50dp"
             android:layout_height="match_parent"
             android:background="@mipmap/ic_launcher"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <View
-                android:background="#67848484"
+                android:background="#67897f7f"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <android.support.v7.widget.Toolbar
@@ -37,6 +38,7 @@
             </android.support.v7.widget.Toolbar>
 
             <ImageView
+
                 android:id="@+id/imageviewdanhsachcakhuc"
                 android:elevation="6dp"
                 android:src="@mipmap/ic_launcher"
@@ -61,6 +63,22 @@
         android:src="@drawable/iconfloatingactionbutton"
         app:layout_anchor="@+id/appbarlayout"
         app:layout_anchorGravity="bottom|center" />
+    <android.support.v4.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/recyclerViewdanhsachbaihat"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
 
 
 </android.support.design.widget.CoordinatorLayout>
