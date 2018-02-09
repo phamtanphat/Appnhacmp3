@@ -2,6 +2,7 @@ package com.ptp.phamtanphat.appnhacmp3.Service;
 
 import com.ptp.phamtanphat.appnhacmp3.Model.Album;
 import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
+import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
@@ -40,4 +41,7 @@ public interface Dataservice {
 
     @GET("danhsachcacplaylist.php")
     Call<List<Playlist>> GetDanhsachcacPlaylist();
+
+    @GET("tatcachude.php")
+    Call<List<ChuDe>> GetAllChude();
 }

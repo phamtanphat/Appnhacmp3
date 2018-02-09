@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachcacplaylist;
+import com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachtatcachude;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
@@ -50,7 +50,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
         txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Danhsachcacplaylist.class);
+                Intent intent = new Intent(getActivity(), Danhsachtatcachude.class);
                 startActivity(intent);
             }
         });

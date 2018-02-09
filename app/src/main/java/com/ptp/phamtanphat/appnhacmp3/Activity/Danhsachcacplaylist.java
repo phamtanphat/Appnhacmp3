@@ -49,6 +49,7 @@ public class Danhsachcacplaylist extends AppCompatActivity {
                 danhsachcactheloaiAdapter = new DanhsachcacplaylistAdapter(Danhsachcacplaylist.this,mangplaylist);
                 recyclerViewdanhsachcacplaylist.setLayoutManager(new GridLayoutManager(Danhsachcacplaylist.this,2));
                 recyclerViewdanhsachcacplaylist.setAdapter(danhsachcactheloaiAdapter);
+
             }
 
             @Override

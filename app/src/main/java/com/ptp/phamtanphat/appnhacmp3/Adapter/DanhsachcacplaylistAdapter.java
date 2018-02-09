@@ -1,6 +1,7 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
 import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
@@ -56,6 +58,14 @@ public class DanhsachcacplaylistAdapter extends RecyclerView.Adapter<Danhsachcac
             imghinhnen = itemView.findViewById(R.id.imageviewdanhsachcacplaylist);
             imgiconplay = itemView.findViewById(R.id.imageviewplaydanhsachcacplaylist);
             txttenplaylist = itemView.findViewById(R.id.textviewtendanhsachcacplaylist);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                    intent.putExtra("idplaylist",mangplaylist.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

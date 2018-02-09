@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.ptp.phamtanphat.appnhacmp3.Adapter.AlbumAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.DanhsachbaihatAdapter;
@@ -71,7 +72,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
 
                 ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
-                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
             }
@@ -98,7 +99,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         try {
             URL url = new URL(playlist.getHinhPlaylist());
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 collapsingToolbarLayout.setBackground(bitmapDrawable);
             }
@@ -108,6 +109,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Picasso.with(this).load(playlist.getHinhPlaylist()).into(imgdanhsachcakhuc);
+
+
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
     }
 
@@ -123,8 +126,11 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     private void DataIntent() {
         Intent intent = getIntent();
         if (intent != null) {
-            if (intent.hasExtra("itemplaylist")){
+            if (intent.hasExtra("itemplaylist")) {
                 playlist = intent.getParcelableExtra("itemplaylist");
+            }
+            if (intent.hasExtra("idplaylist")) {
+                playlist = intent.getParcelableExtra("idplaylist");
             }
         }
     }
