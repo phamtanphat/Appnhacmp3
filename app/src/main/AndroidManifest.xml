@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.DanhsachbaihatActivity" />
-        <activity android:name=".Activity.DanhsachcactheloaiActivity"></activity>
+        <activity android:name=".Activity.Danhsachcacplaylist"></activity>
     </application>
 
 </manifest>

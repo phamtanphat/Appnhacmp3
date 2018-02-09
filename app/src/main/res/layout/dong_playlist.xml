@@ -13,7 +13,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
-        android:background="#23a3a3a3"
+        android:background="@drawable/customview_background"
         android:layout_width="match_parent"
         android:layout_height="110dp"/>
     <ImageView

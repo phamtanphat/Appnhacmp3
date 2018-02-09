@@ -5,11 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachcactheloaiActivity">
+    tools:context="com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachcacplaylist">
+    <android.support.v7.widget.Toolbar
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        android:id="@+id/toolbardanhsachcacplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewdanhsachcactheloai"
+        android:layout_below="@id/toolbardanhsachcacplaylist"
+        android:id="@+id/recyclerViewdanhsachcacplaylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

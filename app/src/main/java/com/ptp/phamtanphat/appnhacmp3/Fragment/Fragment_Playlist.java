@@ -14,8 +14,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
+import com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachcacplaylist;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.PlaylistAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
@@ -38,7 +40,7 @@ import retrofit2.Response;
 public class Fragment_Playlist extends Fragment {
 
     ListView lvplaylist;
-    TextView txttitleplaylist;
+    TextView txttitleplaylist,txtviewxemthemplaylist;
     PlaylistAdapter playlistAdapter;
     ArrayList<Playlist> mangplaylist;
     View view;
@@ -48,12 +50,14 @@ public class Fragment_Playlist extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_playlist, container, false);
         lvplaylist = view.findViewById(R.id.listviewplaylist);
+        txtviewxemthemplaylist = view.findViewById(R.id.textviewviewmoreplaylist);
         txttitleplaylist = view.findViewById(R.id.textviewtitleplaylist);
         GetData();
-        txttitleplaylist.setOnClickListener(new View.OnClickListener() {
+        txtviewxemthemplaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), Danhsachcacplaylist.class);
+                startActivity(intent);
             }
         });
         return view;

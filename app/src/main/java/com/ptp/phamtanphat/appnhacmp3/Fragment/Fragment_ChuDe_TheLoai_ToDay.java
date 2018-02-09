@@ -1,16 +1,10 @@
 package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.res.Resources;
-import android.opengl.Matrix;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachcacplaylist;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
@@ -48,12 +41,19 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
     TextView txtxemthemchudetheloai;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chude_theloai_today, container, false);
 
         relativeLayoutchudetheloai = view.findViewById(R.id.relativechudetheloai);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
         txtxemthemchudetheloai = view.findViewById(R.id.textviewxemthem);
+        txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Danhsachcacplaylist.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }
