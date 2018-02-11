@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".Activity.DanhsachbaihatActivity" />
         <activity android:name=".Activity.Danhsachcacplaylist" />
-        <activity android:name=".Activity.Danhsachtatcachude"></activity>
+        <activity android:name=".Activity.Danhsachtatcachude" />
+        <activity android:name=".Activity.DanhsachtheloaitheochudeActivity"></activity>
     </application>
 
 </manifest>

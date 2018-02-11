@@ -7,57 +7,61 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachtheloaitheochudeActivity;
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
+import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
+import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 /**
- * Created by Dell on 2/10/2018.
+ * Created by Dell on 2/9/2018.
  */
 
-public class DanhsachtatcachudeAdapter extends RecyclerView.Adapter<DanhsachtatcachudeAdapter.ViewHolder>{
-
+public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<DanhsachtheloaitheochudeAdapter.ViewHolder>{
     Context context;
-    ArrayList<ChuDe> mangchude;
+    ArrayList<TheLoai> mangtheloai;
 
-    public DanhsachtatcachudeAdapter(Context context, ArrayList<ChuDe> mangchude) {
+    public DanhsachtheloaitheochudeAdapter(Context context, ArrayList<TheLoai> mangtheloai) {
         this.context = context;
-        this.mangchude = mangchude;
+        this.mangtheloai = mangtheloai;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.dong_cac_chu_de,parent,false);
+        View view = layoutInflater.inflate(R.layout.dong_the_loai_theo_chu_de,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ChuDe chuDe = mangchude.get(position);
-        Picasso.with(context).load(chuDe.getHinhChuDe()).into(holder.imgchude);
+        TheLoai theLoai = mangtheloai.get(position);
+        Picasso.with(context).load(theLoai.getHinhTheLoai()).into(holder.imghinhnen);
+        holder.txttentheloai.setText(theLoai.getTenTheLoai());
     }
 
     @Override
     public int getItemCount() {
-        return mangchude.size();
+        return mangtheloai.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imgchude;
+        ImageView imghinhnen,imgiconplay;
+        TextView txttentheloai;
         public ViewHolder(View itemView) {
             super(itemView);
-            imgchude = itemView.findViewById(R.id.imageviewdongcacchude);
+            imghinhnen = itemView.findViewById(R.id.imageviewttheloaithechude);
+            imgiconplay = itemView.findViewById(R.id.imageviewplayttheloaithechude);
+            txttentheloai = itemView.findViewById(R.id.textviewtentheloaithechude);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, DanhsachtheloaitheochudeActivity.class);
-                    intent.putExtra("chude",mangchude.get(getPosition()));
-                    context.startActivity(intent);
+
                 }
             });
         }

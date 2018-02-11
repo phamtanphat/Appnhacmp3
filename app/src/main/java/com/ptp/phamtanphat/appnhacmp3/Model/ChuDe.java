@@ -1,42 +1,74 @@
 package com.ptp.phamtanphat.appnhacmp3.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChuDe {
+public class ChuDe implements Parcelable {
 
-@SerializedName("IdChuDe")
-@Expose
-private String idChuDe;
-@SerializedName("TenChuDe")
-@Expose
-private String tenChuDe;
-@SerializedName("HinhChuDe")
-@Expose
-private String hinhChuDe;
+    @SerializedName("IdChuDe")
+    @Expose
+    private String idChuDe;
+    @SerializedName("TenChuDe")
+    @Expose
+    private String tenChuDe;
+    @SerializedName("HinhChuDe")
+    @Expose
+    private String hinhChuDe;
 
-public String getIdChuDe() {
-return idChuDe;
-}
+    protected ChuDe(Parcel in) {
+        idChuDe = in.readString();
+        tenChuDe = in.readString();
+        hinhChuDe = in.readString();
+    }
 
-public void setIdChuDe(String idChuDe) {
-this.idChuDe = idChuDe;
-}
+    public static final Creator<ChuDe> CREATOR = new Creator<ChuDe>() {
+        @Override
+        public ChuDe createFromParcel(Parcel in) {
+            return new ChuDe(in);
+        }
 
-public String getTenChuDe() {
-return tenChuDe;
-}
+        @Override
+        public ChuDe[] newArray(int size) {
+            return new ChuDe[size];
+        }
+    };
 
-public void setTenChuDe(String tenChuDe) {
-this.tenChuDe = tenChuDe;
-}
+    public String getIdChuDe() {
+        return idChuDe;
+    }
 
-public String getHinhChuDe() {
-return hinhChuDe;
-}
+    public void setIdChuDe(String idChuDe) {
+        this.idChuDe = idChuDe;
+    }
 
-public void setHinhChuDe(String hinhChuDe) {
-this.hinhChuDe = hinhChuDe;
-}
+    public String getTenChuDe() {
+        return tenChuDe;
+    }
 
+    public void setTenChuDe(String tenChuDe) {
+        this.tenChuDe = tenChuDe;
+    }
+
+    public String getHinhChuDe() {
+        return hinhChuDe;
+    }
+
+    public void setHinhChuDe(String hinhChuDe) {
+        this.hinhChuDe = hinhChuDe;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idChuDe);
+        dest.writeString(tenChuDe);
+        dest.writeString(hinhChuDe);
+    }
 }

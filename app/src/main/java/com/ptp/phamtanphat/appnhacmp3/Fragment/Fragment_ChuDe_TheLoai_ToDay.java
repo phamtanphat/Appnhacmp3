@@ -14,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachbaihatActivity;
 import com.ptp.phamtanphat.appnhacmp3.Activity.Danhsachtatcachude;
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachtheloaitheochudeActivity;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
@@ -66,10 +68,10 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
             public void onResponse(Call<Theloaitrongngay> call, Response<Theloaitrongngay> response) {
                 Theloaitrongngay theloaitrongngay = response.body();
 
-                ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
+                final ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
                 chuDeArrayList.addAll(theloaitrongngay.getChuDe());
 
-                ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
+                final ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
                 theLoaiArrayList.addAll(theloaitrongngay.getTheLoai());
 
                 LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -89,10 +91,13 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    final int finalI = i;
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent intent = new Intent(getActivity(), DanhsachtheloaitheochudeActivity.class);
+                            intent.putExtra("chude",chuDeArrayList.get(finalI));
+                            startActivity(intent);
                         }
                     });
                 }
@@ -110,10 +115,13 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
 
+                    final int finalJ = j;
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
+                            intent.putExtra("Theloaitrongngay",theLoaiArrayList.get(finalJ));
+                            startActivity(intent);
                         }
                     });
                 }

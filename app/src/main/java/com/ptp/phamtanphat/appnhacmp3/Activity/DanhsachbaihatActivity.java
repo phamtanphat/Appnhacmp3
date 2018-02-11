@@ -27,6 +27,7 @@ import com.ptp.phamtanphat.appnhacmp3.Model.Album;
 import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
+import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.ptp.phamtanphat.appnhacmp3.Service.APIService;
 import com.ptp.phamtanphat.appnhacmp3.Service.Dataservice;
@@ -52,6 +53,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     ImageView imgdanhsachcakhuc;
     RecyclerView recyclerViewdanhsachcakhuc;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
+    TheLoai theLoai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +61,42 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
-        GetData();
+        if (theLoai != null && !theLoai.getTenTheLoai().equals("")){
+            setValueInView(theLoai.getTenTheLoai(),theLoai.getHinhTheLoai());
+            GetData(theLoai.getIdTheLoai());
+        }
+        if (playlist != null && !playlist.getTen().equals("")){
+            setValueInView(playlist.getTen(),playlist.getHinhPlaylist());
+            GetData(playlist.getIdPlaylist());
+        }
+
+
 
     }
 
-    private void GetData() {
+    private void setValueInView(String ten , String hinh) {
+        collapsingToolbarLayout.setTitle(ten);
+        try {
+            URL url = new URL(hinh);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                collapsingToolbarLayout.setBackground(bitmapDrawable);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
+
+
+    }
+
+    private void GetData(String id) {
 
         Dataservice dataservice = APIService.getService();
-        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihat(playlist.getIdPlaylist());
+        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihat(id);
         listCall.enqueue(new Callback<List<Baihat>>() {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
@@ -95,22 +125,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        collapsingToolbarLayout.setTitle(playlist.getTen());
-        try {
-            URL url = new URL(playlist.getHinhPlaylist());
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                collapsingToolbarLayout.setBackground(bitmapDrawable);
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Picasso.with(this).load(playlist.getHinhPlaylist()).into(imgdanhsachcakhuc);
-
-
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
     }
 
@@ -131,6 +145,9 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("idplaylist")) {
                 playlist = intent.getParcelableExtra("idplaylist");
+            }
+            if (intent.hasExtra("Theloaitrongngay")){
+                theLoai = intent.getParcelableExtra("Theloaitrongngay");
             }
         }
     }

@@ -18,13 +18,13 @@
             android:id="@+id/collapsingtoolbar"
             android:layout_width="match_parent"
             app:expandedTitleGravity="center|bottom"
-            app:expandedTitleMarginBottom="50dp"
+            app:expandedTitleMarginBottom="33dp"
             android:layout_height="match_parent"
             android:background="@mipmap/ic_launcher"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <View
-                android:background="#67897f7f"
+                android:background="@drawable/customview_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <android.support.v7.widget.Toolbar
@@ -38,7 +38,7 @@
             </android.support.v7.widget.Toolbar>
 
             <ImageView
-
+                android:layout_marginTop="38dp"
                 android:id="@+id/imageviewdanhsachcakhuc"
                 android:elevation="6dp"
                 android:src="@mipmap/ic_launcher"

@@ -5,6 +5,7 @@ import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.Model.ChuDe;
 import com.ptp.phamtanphat.appnhacmp3.Model.Playlist;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
+import com.ptp.phamtanphat.appnhacmp3.Model.TheLoai;
 import com.ptp.phamtanphat.appnhacmp3.Model.Theloaitrongngay;
 
 import java.util.List;
@@ -44,4 +45,12 @@ public interface Dataservice {
 
     @GET("tatcachude.php")
     Call<List<ChuDe>> GetAllChude();
+
+    @FormUrlEncoded
+    @POST("theloaitheochude.php")
+    Call<List<TheLoai>> GetTheloaitheochude(@Field("idchude") String idchude);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<Baihat>> GetDanhsachbaihattheochude(@Field("idtheloai") String idtheloai);
 }

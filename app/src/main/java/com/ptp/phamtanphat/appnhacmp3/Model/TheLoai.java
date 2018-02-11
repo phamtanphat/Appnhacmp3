@@ -1,9 +1,12 @@
 package com.ptp.phamtanphat.appnhacmp3.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TheLoai {
+public class TheLoai implements Parcelable {
 
 @SerializedName("IdTheLoai")
 @Expose
@@ -18,7 +21,26 @@ private String tenTheLoai;
 @Expose
 private String hinhTheLoai;
 
-public String getIdTheLoai() {
+    protected TheLoai(Parcel in) {
+        idTheLoai = in.readString();
+        idKeyChuDe = in.readString();
+        tenTheLoai = in.readString();
+        hinhTheLoai = in.readString();
+    }
+
+    public static final Creator<TheLoai> CREATOR = new Creator<TheLoai>() {
+        @Override
+        public TheLoai createFromParcel(Parcel in) {
+            return new TheLoai(in);
+        }
+
+        @Override
+        public TheLoai[] newArray(int size) {
+            return new TheLoai[size];
+        }
+    };
+
+    public String getIdTheLoai() {
 return idTheLoai;
 }
 
@@ -50,4 +72,16 @@ public void setHinhTheLoai(String hinhTheLoai) {
 this.hinhTheLoai = hinhTheLoai;
 }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idTheLoai);
+        dest.writeString(idKeyChuDe);
+        dest.writeString(tenTheLoai);
+        dest.writeString(hinhTheLoai);
+    }
 }
