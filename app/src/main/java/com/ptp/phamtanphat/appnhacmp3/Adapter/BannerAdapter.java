@@ -40,7 +40,7 @@ public class BannerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dong_banner,null);
 
@@ -57,8 +57,10 @@ public class BannerAdapter extends PagerAdapter {
         imgplaybanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-//                intent.putExtra("id")
+                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                intent.putExtra("banner",arrayListbanner.get(position));
+                context.startActivity(intent);
+
             }
         });
         container.addView(view);

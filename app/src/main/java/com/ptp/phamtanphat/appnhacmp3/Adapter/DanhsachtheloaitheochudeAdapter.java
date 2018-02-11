@@ -61,7 +61,9 @@ public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<Danhsa
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(context,DanhsachbaihatActivity.class);
+                    intent.putExtra("theloai",mangtheloai.get(getPosition()));
+                    context.startActivity(intent);
                 }
             });
         }

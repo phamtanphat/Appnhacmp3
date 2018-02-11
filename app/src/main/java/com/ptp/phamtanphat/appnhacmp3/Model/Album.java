@@ -1,9 +1,12 @@
 package com.ptp.phamtanphat.appnhacmp3.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Album {
+public class Album implements Parcelable{
 
     @SerializedName("IdAlbum")
     @Expose
@@ -17,6 +20,25 @@ public class Album {
     @SerializedName("HinhanhAlbum")
     @Expose
     private String hinhanhAlbum;
+
+    protected Album(Parcel in) {
+        idAlbum = in.readString();
+        tenAlbum = in.readString();
+        tencasiAlbum = in.readString();
+        hinhanhAlbum = in.readString();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     public String getIdAlbum() {
         return idAlbum;
@@ -50,4 +72,16 @@ public class Album {
         this.hinhanhAlbum = hinhanhAlbum;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idAlbum);
+        dest.writeString(tenAlbum);
+        dest.writeString(tencasiAlbum);
+        dest.writeString(hinhanhAlbum);
+    }
 }

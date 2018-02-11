@@ -1,6 +1,7 @@
 package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.DanhsachtatcaAlbumActivity;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.AlbumAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Model.Album;
 import com.ptp.phamtanphat.appnhacmp3.R;
@@ -44,6 +46,13 @@ public class Fragment_Album_Hot extends Fragment {
         view = inflater.inflate(R.layout.fragment_album_hot,container,false);
         recyclerViewalbum = view.findViewById(R.id.recyclerViewAlbum);
         txtxemthemalbuml = view.findViewById(R.id.textviewxemthemalbum);
+        txtxemthemalbuml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DanhsachtatcaAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }

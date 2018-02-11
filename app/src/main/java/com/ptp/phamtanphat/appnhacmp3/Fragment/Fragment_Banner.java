@@ -78,8 +78,6 @@ public class Fragment_Banner extends Fragment {
                     }
                 };
                 handler.postDelayed(runnable,4500);
-
-
             }
 
             @Override

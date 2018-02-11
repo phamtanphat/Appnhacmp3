@@ -54,6 +54,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     RecyclerView recyclerViewdanhsachcakhuc;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     TheLoai theLoai;
+    Quangcao quangcao;
+    Album album;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,15 +65,60 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         init();
         if (theLoai != null && !theLoai.getTenTheLoai().equals("")){
             setValueInView(theLoai.getTenTheLoai(),theLoai.getHinhTheLoai());
-            GetData(theLoai.getIdTheLoai());
+            GetDataTheLoai(theLoai.getIdTheLoai());
         }
         if (playlist != null && !playlist.getTen().equals("")){
             setValueInView(playlist.getTen(),playlist.getHinhPlaylist());
-            GetData(playlist.getIdPlaylist());
+            GetDataPlaylist(playlist.getIdPlaylist());
+        }
+        if (album != null && !album.getTenAlbum().equals("")){
+            setValueInView(album.getTenAlbum(),album.getHinhanhAlbum());
+            GetDataAlbum(album.getIdAlbum());
         }
 
 
 
+
+    }
+
+    private void GetDataAlbum(String idAlbum) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihattheoalbum(idAlbum);
+        listCall.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+
+                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void GetDataTheLoai(String idTheLoai) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihattheochude(idTheLoai);
+        listCall.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+
+                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setValueInView(String ten , String hinh) {
@@ -93,10 +140,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 
     }
 
-    private void GetData(String id) {
+    private void GetDataPlaylist(String idplaylist) {
 
         Dataservice dataservice = APIService.getService();
-        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihat(id);
+        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihat(idplaylist);
         listCall.enqueue(new Callback<List<Baihat>>() {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
@@ -148,6 +195,16 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("Theloaitrongngay")){
                 theLoai = intent.getParcelableExtra("Theloaitrongngay");
+            }
+            if (intent.hasExtra("theloai")){
+                theLoai = intent.getParcelableExtra("theloai");
+            }
+            if (intent.hasExtra("banner")){
+                quangcao = intent.getParcelableExtra("banner");
+            }
+            if (intent.hasExtra("album")){
+                album = intent.getParcelableExtra("album");
+                Log.d("BBB",album.getTenAlbum());
             }
         }
     }
