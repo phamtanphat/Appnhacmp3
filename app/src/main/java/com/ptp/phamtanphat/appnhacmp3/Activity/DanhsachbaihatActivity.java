@@ -75,10 +75,34 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             setValueInView(album.getTenAlbum(),album.getHinhanhAlbum());
             GetDataAlbum(album.getIdAlbum());
         }
+        if (quangcao != null && !quangcao.getTenBaiHat().equals("")){
+            setValueInView(quangcao.getTenBaiHat(),quangcao.getHinhBaiHat());
+            GetDataQuangcao(quangcao.getIdQuangcao());
+        }
 
 
 
 
+    }
+
+    private void GetDataQuangcao(String idBaihat) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Baihat>> listCall = dataservice.GetDanhsachbaihattheoquangcao(idBaihat);
+        listCall.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+
+                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataAlbum(String idAlbum) {
@@ -204,7 +228,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("album")){
                 album = intent.getParcelableExtra("album");
-                Log.d("BBB",album.getTenAlbum());
             }
         }
     }

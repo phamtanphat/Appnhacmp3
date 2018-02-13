@@ -54,7 +54,7 @@ public class BannerAdapter extends PagerAdapter {
         Picasso.with(context).load(arrayListbanner.get(position).getHinhBaiHat()).into(imgsongbanner);
         txtlyricsongbanner.setText(arrayListbanner.get(position).getNodung());
         txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
-        imgplaybanner.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DanhsachbaihatActivity.class);

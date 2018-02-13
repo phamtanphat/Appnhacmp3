@@ -37,7 +37,7 @@ public class DanhsachtatcaAlbumActivity extends AppCompatActivity {
 
     private void GetData() {
         Dataservice dataservice = APIService.getService();
-        Call<List<Album>> listCall = dataservice.GetAlbumHot();
+        Call<List<Album>> listCall = dataservice.GetTatCaAlbum();
         listCall.enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
