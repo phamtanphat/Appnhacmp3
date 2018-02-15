@@ -17,6 +17,8 @@
             android:textSize="20sp" />
 
         <TextView
+            android:maxWidth="250dp"
+            android:ellipsize="end"
             android:singleLine="true"
             android:id="@+id/textviewdanhsachtenbaihat"
             android:layout_width="wrap_content"
@@ -37,6 +39,14 @@
             android:text="Quach thanh danh"
             android:textColor="#979797"
             android:textSize="20sp" />
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:id="@+id/imageviewluotthichdanhsachbaihat"
+            android:src="@drawable/iconlove"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

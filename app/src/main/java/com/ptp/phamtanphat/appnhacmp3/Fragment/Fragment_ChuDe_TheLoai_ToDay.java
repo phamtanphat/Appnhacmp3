@@ -3,6 +3,7 @@ package com.ptp.phamtanphat.appnhacmp3.Fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -35,15 +36,16 @@ import retrofit2.Response;
  * Created by Tan Phat on 1/6/2018.
  */
 
-public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
+public class Fragment_ChuDe_TheLoai_ToDay extends android.support.v4.app.Fragment {
 
     View view;
     RelativeLayout relativeLayoutchudetheloai;
     HorizontalScrollView horizontalScrollView;
     TextView txtxemthemchudetheloai;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chude_theloai_today, container, false);
 
         relativeLayoutchudetheloai = view.findViewById(R.id.relativechudetheloai);

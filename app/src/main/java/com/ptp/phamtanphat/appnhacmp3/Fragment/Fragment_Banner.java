@@ -2,16 +2,14 @@ package com.ptp.phamtanphat.appnhacmp3.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.eftimoff.viewpagertransformers.RotateDownTransformer;
-import com.eftimoff.viewpagertransformers.RotateUpTransformer;
 import com.ptp.phamtanphat.appnhacmp3.Adapter.BannerAdapter;
 import com.ptp.phamtanphat.appnhacmp3.Model.Quangcao;
 import com.ptp.phamtanphat.appnhacmp3.R;
@@ -39,9 +37,10 @@ public class Fragment_Banner extends Fragment {
     int currentItem;
     Runnable runnable;
     Handler handler;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_banner,container,false);
 
         viewPager = view.findViewById(R.id.viewpager);

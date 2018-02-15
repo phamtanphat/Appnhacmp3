@@ -7,21 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.R;
+import com.ptp.phamtanphat.appnhacmp3.Service.APIService;
+import com.ptp.phamtanphat.appnhacmp3.Service.Dataservice;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Dell on 2/5/2018.
  */
 
-public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.ViewHolder>{
+public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.ViewHolder> {
     Context context;
     ArrayList<Baihat> mangbaihathot;
-    Boolean like = false;
 
     public BaihathopAdapter(Context context, ArrayList<Baihat> mangbaihathot) {
         this.context = context;
@@ -31,7 +37,7 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.dong_bai_hat_hot,parent,false);
+        View view = layoutInflater.inflate(R.layout.dong_bai_hat_hot, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,9 +55,10 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
         return mangbaihathot.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtten,txtcasi;
-        ImageView imghinh,imgluothich;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txtten, txtcasi;
+        ImageView imghinh, imgluothich;
+
         public ViewHolder(View itemView) {
             super(itemView);
             txtten = itemView.findViewById(R.id.textviewtenbaihathot);
@@ -62,6 +69,25 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
                 @Override
                 public void onClick(View v) {
                     imgluothich.setImageResource(R.drawable.iconloved);
+                    Dataservice dataservice = APIService.getService();
+                    Call<String> callback = dataservice.UpdateLuotthich("1", mangbaihathot.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua = response.body();
+                            if (ketqua.equals("success")) {
+                                Toast.makeText(context, "Da thich", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Loi!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgluothich.setEnabled(false);
                 }
             });
         }

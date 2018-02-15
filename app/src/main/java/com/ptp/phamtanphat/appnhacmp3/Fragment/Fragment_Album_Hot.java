@@ -3,6 +3,7 @@ package com.ptp.phamtanphat.appnhacmp3.Fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,14 +36,15 @@ import retrofit2.Response;
  * Created by Dell on 2/1/2018.
  */
 
-public class Fragment_Album_Hot extends Fragment {
+public class Fragment_Album_Hot extends android.support.v4.app.Fragment {
     View view;
     RecyclerView recyclerViewalbum;
     AlbumAdapter albumAdapter;
     TextView txtxemthemalbuml;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album_hot,container,false);
         recyclerViewalbum = view.findViewById(R.id.recyclerViewAlbum);
         txtxemthemalbuml = view.findViewById(R.id.textviewxemthemalbum);

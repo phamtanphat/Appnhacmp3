@@ -1,49 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:scrollbars="none"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.ptp.phamtanphat.appnhacmp3.Activity.MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/myTablayout"
+        app:tabIndicatorColor="@color/colorFloatingButton"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorFloatingButton"
+        app:tabTextColor="#0d0d0d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@android:color/transparent">
 
-        <fragment
-            android:id="@+id/fragmentbanner"
-            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <fragment
-            android:id="@+id/fragmentplaylist"
-            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Playlist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <fragment
-            android:id="@+id/fragmentchudetheloai"
-            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_ChuDe_TheLoai_ToDay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <fragment
-            android:id="@+id/fragmentalbum"
-            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Album_Hot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <fragment
-            android:id="@+id/fragmentbaihathot"
-            android:name="com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Bai_Hat_Hot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-</ScrollView>
+    </android.support.design.widget.TabLayout>
+</LinearLayout>
 
 
 
