@@ -93,6 +93,8 @@ public class Fragment_Tim_Kiem extends Fragment{
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerViewsearchbaihat.setLayoutManager(linearLayoutManager);
                     recyclerViewsearchbaihat.setAdapter(searchBaiHatAdapter);
+                    txtkhongcobaihat.setVisibility(View.GONE);
+                    recyclerViewsearchbaihat.setVisibility(View.VISIBLE);
                 }else {
                     recyclerViewsearchbaihat.setVisibility(View.GONE);
                     txtkhongcobaihat.setVisibility(View.VISIBLE);

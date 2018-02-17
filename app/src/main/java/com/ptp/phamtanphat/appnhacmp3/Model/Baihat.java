@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Baihat implements Parcelable{
+public class Baihat implements Parcelable {
 
 @SerializedName("Idbaihat")
 @Expose
@@ -39,6 +39,7 @@ private String luotthich;
         linkbaihat = in.readString();
         luotthich = in.readString();
     }
+
 
     public static final Creator<Baihat> CREATOR = new Creator<Baihat>() {
         @Override
@@ -107,6 +108,7 @@ return luotthich;
 public void setLuotthich(String luotthich) {
 this.luotthich = luotthich;
 }
+
 
     @Override
     public int describeContents() {

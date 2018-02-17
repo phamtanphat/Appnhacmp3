@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,13 +50,15 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
-    FloatingActionButton floatingActionButton;
     ImageView imgdanhsachcakhuc;
     RecyclerView recyclerViewdanhsachcakhuc;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     TheLoai theLoai;
     Quangcao quangcao;
     Album album;
+    FloatingActionButton floatingActionButton;
+    ArrayList<Baihat> mangbaihat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,26 +66,40 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
-        if (theLoai != null && !theLoai.getTenTheLoai().equals("")){
-            setValueInView(theLoai.getTenTheLoai(),theLoai.getHinhTheLoai());
+        if (theLoai != null && !theLoai.getTenTheLoai().equals("")) {
+            setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
             GetDataTheLoai(theLoai.getIdTheLoai());
+            eventClick();
         }
-        if (playlist != null && !playlist.getTen().equals("")){
-            setValueInView(playlist.getTen(),playlist.getHinhPlaylist());
+        if (playlist != null && !playlist.getTen().equals("")) {
+            setValueInView(playlist.getTen(), playlist.getHinhPlaylist());
             GetDataPlaylist(playlist.getIdPlaylist());
+            eventClick();
         }
-        if (album != null && !album.getTenAlbum().equals("")){
-            setValueInView(album.getTenAlbum(),album.getHinhanhAlbum());
+        if (album != null && !album.getTenAlbum().equals("")) {
+            setValueInView(album.getTenAlbum(), album.getHinhanhAlbum());
             GetDataAlbum(album.getIdAlbum());
+            eventClick();
         }
-        if (quangcao != null && !quangcao.getTenBaiHat().equals("")){
-            setValueInView(quangcao.getTenBaiHat(),quangcao.getHinhBaiHat());
+        if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
+            setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             GetDataQuangcao(quangcao.getIdQuangcao());
+            eventClick();
         }
 
 
+    }
 
-
+    private void eventClick() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DanhsachbaihatActivity.this, PlayNhacActivity.class);
+                Log.d("BBB", mangbaihat.size() + "");
+                intent.putExtra("cacbaihat", mangbaihat);
+                startActivity(intent);
+            }
+        });
     }
 
     private void GetDataQuangcao(String idBaihat) {
@@ -91,8 +108,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         listCall.enqueue(new Callback<List<Baihat>>() {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
-
-                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                mangbaihat = (ArrayList<Baihat>) response.body();
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
@@ -112,7 +128,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
 
-                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                mangbaihat = (ArrayList<Baihat>) response.body();
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
@@ -132,7 +148,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
 
-                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                mangbaihat = (ArrayList<Baihat>) response.body();
+
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
@@ -145,7 +162,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
 
-    private void setValueInView(String ten , String hinh) {
+    private void setValueInView(String ten, String hinh) {
         collapsingToolbarLayout.setTitle(ten);
         try {
             URL url = new URL(hinh);
@@ -171,8 +188,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         listCall.enqueue(new Callback<List<Baihat>>() {
             @Override
             public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
-
-                ArrayList<Baihat> mangbaihat = (ArrayList<Baihat>) response.body();
+                mangbaihat = (ArrayList<Baihat>) response.body();
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
@@ -217,16 +233,16 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             if (intent.hasExtra("idplaylist")) {
                 playlist = intent.getParcelableExtra("idplaylist");
             }
-            if (intent.hasExtra("Theloaitrongngay")){
+            if (intent.hasExtra("Theloaitrongngay")) {
                 theLoai = intent.getParcelableExtra("Theloaitrongngay");
             }
-            if (intent.hasExtra("theloai")){
+            if (intent.hasExtra("theloai")) {
                 theLoai = intent.getParcelableExtra("theloai");
             }
-            if (intent.hasExtra("banner")){
+            if (intent.hasExtra("banner")) {
                 quangcao = intent.getParcelableExtra("banner");
             }
-            if (intent.hasExtra("album")){
+            if (intent.hasExtra("album")) {
                 album = intent.getParcelableExtra("album");
             }
         }

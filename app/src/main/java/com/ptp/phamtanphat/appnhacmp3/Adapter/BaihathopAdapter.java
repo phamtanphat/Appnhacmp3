@@ -1,6 +1,7 @@
 package com.ptp.phamtanphat.appnhacmp3.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ptp.phamtanphat.appnhacmp3.Activity.PlayNhacActivity;
 import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.R;
 import com.ptp.phamtanphat.appnhacmp3.Service.APIService;
@@ -65,6 +67,14 @@ public class BaihathopAdapter extends RecyclerView.Adapter<BaihathopAdapter.View
             txtcasi = itemView.findViewById(R.id.textviewcasibaihathot);
             imghinh = itemView.findViewById(R.id.imageviewbaihathot);
             imgluothich = itemView.findViewById(R.id.imageviewluotthich);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlayNhacActivity.class);
+                    intent.putExtra("cakhuc",mangbaihathot.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
             imgluothich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
