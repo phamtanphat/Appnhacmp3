@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -25,9 +27,13 @@ import com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Dia_Nhac;
 import com.ptp.phamtanphat.appnhacmp3.Fragment.Fragment_Play_Danh_Sach_Cac_Bai_Hat;
 import com.ptp.phamtanphat.appnhacmp3.Model.Baihat;
 import com.ptp.phamtanphat.appnhacmp3.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -42,9 +48,14 @@ public class PlayNhacActivity extends AppCompatActivity {
     ImageButton imgplay, imgrepeat, imgnext, imgpre, imgrandom;
     ViewPager viewPagerPlaylistnhac;
     public static ViewPagerPlaylistnhac adapterpager;
+    ArrayList<Baihat> arraybaihat;
     Fragment_Dia_Nhac fragment_dia_nhac;
     int position = 0;
     Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+    boolean repeat = false;
+    boolean checkrandom = false;
+    boolean nextbaihat = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,85 +69,181 @@ public class PlayNhacActivity extends AppCompatActivity {
     }
 
     private void eventPlay() {
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (fragment_dia_nhac.isInLayout()) {
-                    if (baihat != null && baihat.getHinhbaihat().length() > 0) {
-                        fragment_dia_nhac.PlayDiaNhac(baihat.getHinhbaihat());
-                    }
+                if (adapterpager.getItem(1) != null) {
                     if (mangbaihat.size() > 0) {
                         fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(0).getHinhbaihat());
+                        imgplay.performClick();
+                        handler.removeCallbacks(this);
                     }
+                } else {
+                    handler.postDelayed(this, 100);
                 }
+
             }
-        }, 1000);
+        }, 500);
 
         imgplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (baihat != null && baihat.getHinhbaihat().length() > 0) {
-                    fragment_dia_nhac.PlayDiaNhac(baihat.getHinhbaihat());
+
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    imgplay.setImageResource(R.drawable.iconplay);
+                } else {
+                    if (mediaPlayer.isLooping()) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
+                    mediaPlayer.start();
+                    imgplay.setImageResource(R.drawable.iconpause);
                 }
-                if (mangbaihat.size() > 0) {
-                    fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(0).getHinhbaihat());
-                }
+                TimeSong();
+                UpdateTime();
+
 
             }
         });
         imgnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (baihat != null && baihat.getHinhbaihat().length() > 0) {
-                    fragment_dia_nhac.NextOrPreDiaNhac(baihat.getHinhbaihat());
-                    fragment_dia_nhac.PlayDiaNhac(baihat.getHinhbaihat());
-                    getSupportActionBar().setTitle(baihat.getTenbaihat());
+                if (mediaPlayer!= null){
+                   if (mediaPlayer.isPlaying()) {
+                       mediaPlayer.stop();
+                   }else {
+                       mediaPlayer.stop();
+                   }
                 }
-                if (mangbaihat.size() > 0) {
 
-                    if (position < (mangbaihat.size() - 1)) {
-                        position += 1;
-                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                        fragment_dia_nhac.NextOrPreDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                    } else {
-                        Toast.makeText(PlayNhacActivity.this, "Hết bài hát để chuyển!!", Toast.LENGTH_SHORT).show();
-                        Log.d("BBB", "Mã " + position);
+                    if (mangbaihat.size() > 0) {
+
+                        if (position < (mangbaihat.size())) {
+                            position++;
+
+                            if (position > (mangbaihat.size() - 1)) {
+                                position = 0;
+                            }
+
+                            if (repeat == true) {
+                                position -= 1;
+                            }
+                            if (checkrandom == true) {
+                                Random random = new Random();
+                                int index = random.nextInt(mangbaihat.size());
+                                if (index == position) {
+                                    position = index - 1;
+                                }
+                                position = index;
+
+                            }
+
+                            mediaPlayer = new MediaPlayer();
+                            PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                            imgplay.setImageResource(R.drawable.iconpause);
+                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                            TimeSong();
+                            UpdateTime();
+                        }
+
                     }
 
-                }
+
 
             }
         });
         imgpre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (baihat != null && baihat.getHinhbaihat().length() > 0) {
-                    fragment_dia_nhac.NextOrPreDiaNhac(baihat.getHinhbaihat());
-                    fragment_dia_nhac.PlayDiaNhac(baihat.getHinhbaihat());
-                    getSupportActionBar().setTitle(baihat.getTenbaihat());
+                if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
                 }
                 if (mangbaihat.size() > 0) {
 
-                    if (position > 0) {
-                        position = position - 1;
-                        if (position == -1) {
-                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(0).getHinhbaihat());
-                            fragment_dia_nhac.NextOrPreDiaNhac(mangbaihat.get(0).getHinhbaihat());
-                            getSupportActionBar().setTitle(mangbaihat.get(0).getTenbaihat());
-                        } else {
-                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                            fragment_dia_nhac.NextOrPreDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                    if (position < (mangbaihat.size())) {
+                        position--;
+                        if (position < 0) {
+                            position = mangbaihat.size() - 1;
                         }
-                    } else {
-                        Toast.makeText(PlayNhacActivity.this, "Hết bài hát để chuyển!!", Toast.LENGTH_SHORT).show();
-                        Log.d("BBB", "Pre" + position + "");
+                        if (repeat == true) {
+                            position += 1;
+                        }
+                        if (checkrandom == true) {
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if (index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
+
+                        }
+                        mediaPlayer = new MediaPlayer();
+                        PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        TimeSong();
+                        UpdateTime();
+
                     }
 
                 }
+            }
+        });
+        sktime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
+        imgrandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkrandom == false) {
+                    if (repeat == true){
+                        repeat = false;
+                        imgrandom.setImageResource(R.drawable.iconshuffled);
+                        imgrepeat.setImageResource(R.drawable.iconrepeat);
+                    }
+                    imgrandom.setImageResource(R.drawable.iconshuffled);
+                    checkrandom = true;
+                } else {
+
+                    imgrandom.setImageResource(R.drawable.iconsuffle);
+                    checkrandom = true;
+                }
+            }
+        });
+        imgrepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (repeat == false) {
+                    if (checkrandom == true){
+                        checkrandom = false;
+                        imgrepeat.setImageResource(R.drawable.iconsyned);
+                        imgrandom.setImageResource(R.drawable.iconsuffle);
+                    }
+                    imgrepeat.setImageResource(R.drawable.iconsyned);
+                    repeat = true;
+                } else {
+
+                    imgrepeat.setImageResource(R.drawable.iconrepeat);
+                    repeat = false;
+                }
+
             }
         });
 
@@ -145,52 +252,28 @@ public class PlayNhacActivity extends AppCompatActivity {
     private void init() {
         fragment_dia_nhac = new Fragment_Dia_Nhac();
         fragment_play_danh_sach_cac_bai_hat = new Fragment_Play_Danh_Sach_Cac_Bai_Hat();
-
-        setSupportActionBar(toolbarplaynhac);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarplaynhac.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        toolbarplaynhac.setTitleTextColor(Color.WHITE);
-        if (baihat != null) {
-            getSupportActionBar().setTitle(baihat.getTenbaihat());
-        }
-        if (mangbaihat.size() > 0) {
-            getSupportActionBar().setTitle(mangbaihat.get(0).getTenbaihat());
-        }
-
         adapterpager = new ViewPagerPlaylistnhac(getSupportFragmentManager());
         adapterpager.AddFragment(fragment_play_danh_sach_cac_bai_hat);
         adapterpager.AddFragment(fragment_dia_nhac);
         viewPagerPlaylistnhac.setAdapter(adapterpager);
         circleIndicatorplaynhac.setViewPager(viewPagerPlaylistnhac);
         fragment_dia_nhac = (Fragment_Dia_Nhac) adapterpager.getItem(1);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        setSupportActionBar(toolbarplaynhac);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarplaynhac.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                if (baihat != null) {
-                    if (baihat.getHinhbaihat().length() > 0) {
-                        fragment_dia_nhac.PlayDiaNhac(baihat.getHinhbaihat());
-                        handler.removeCallbacks(this);
-                    } else {
-                        handler.postDelayed(this, 200);
-                    }
-                }
-
-                if (mangbaihat.size() > 0 && mangbaihat.get(0).getHinhbaihat().length() > 0) {
-                    fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(0).getHinhbaihat());
-                    handler.removeCallbacks(this);
-                } else {
-                    handler.postDelayed(this, 200);
-                }
-
-
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mangbaihat.clear();
+                finish();
             }
-        }, 200);
+        });
+        toolbarplaynhac.setTitleTextColor(Color.WHITE);
+
+        if (mangbaihat.size() > 0) {
+            getSupportActionBar().setTitle(mangbaihat.get(0).getTenbaihat());
+            PlayNhacMp3(mangbaihat.get(0).getLinkbaihat());
+        }
 
 
     }
@@ -218,8 +301,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                 mangbaihat.add(baihat);
             }
             if (intent.hasExtra("cacbaihat")) {
-                ArrayList<Baihat> arraybaihat = intent.getParcelableArrayListExtra("cacbaihat");
-                Log.d("BBB", arraybaihat.size() + "");
+                arraybaihat = intent.getParcelableArrayListExtra("cacbaihat");
                 mangbaihat = arraybaihat;
             }
         }
@@ -227,21 +309,101 @@ public class PlayNhacActivity extends AppCompatActivity {
 
     public void PlayNhacMp3(String url) {
         //url = "http://khoapham.vn/download/vietnamoi.mp3";
-        MediaPlayer mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepareAsync();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
-                public void onPrepared(MediaPlayer mp) {
+                public void onPrepared(final MediaPlayer mp) {
                     mp.start();
+
                 }
             });
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
+
+    private void TimeSong() {
+        final Handler handlerTImeSOng = new Handler();
+        handlerTImeSOng.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition() > 50) {
+                    SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
+                    txtTotalTime.setText(dinhDangGio.format(mediaPlayer.getDuration()));
+                    // gán max skSong = tổng thời gian bài hát
+                    sktime.setMax(mediaPlayer.getDuration());
+                    nextbaihat = true;
+                    handlerTImeSOng.removeCallbacks(this);
+
+                } else {
+                    handlerTImeSOng.postDelayed(this, 1000);
+                }
+            }
+        }, 2000);
+
+    }
+
+    private void UpdateTime() {
+        final Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // update seekbar
+                sktime.setProgress(mediaPlayer.getCurrentPosition());
+                // update txtTimeSong
+                SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
+                txtTimeSong.setText(dinhDangGio.format(mediaPlayer.getCurrentPosition()));
+//
+                if (nextbaihat == true) {
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            if ((mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition()) < 500) {
+                                position++;
+                                if (mangbaihat.size() > 1) {
+                                    if (position > mangbaihat.size() - 1) {
+                                        position = 0;
+                                    }
+                                    if (mediaPlayer.isPlaying()) {
+                                        mediaPlayer.stop();
+                                    }
+                                    if (repeat == true) {
+                                        position -= 1;
+                                    }
+                                    if (checkrandom == true) {
+                                        Random random = new Random();
+                                        int index = random.nextInt(mangbaihat.size());
+                                        if (index == position) {
+                                            position = index - 1;
+                                        }
+                                        position = index;
+
+                                    }
+                                    mediaPlayer = new MediaPlayer();
+                                    fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                                    PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                                    getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                                    TimeSong();
+                                    nextbaihat = false;
+                                }
+                            }
+                        }
+                    });
+                }
+
+
+                handler.postDelayed(this, 300);
+            }
+        }, 100);
+    }
+
 }
+

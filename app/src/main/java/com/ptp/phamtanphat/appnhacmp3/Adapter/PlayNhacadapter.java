@@ -29,6 +29,7 @@ public class PlayNhacadapter extends RecyclerView.Adapter<PlayNhacadapter.ViewHo
     Context context;
     ArrayList<Baihat> mangbaihat;
     Toolbar toolbar;
+    MediaPlayer mediaPlayer;
 
     public PlayNhacadapter(Context context, ArrayList<Baihat> mangbaihat, Toolbar toolbar) {
         this.context = context;
@@ -63,36 +64,7 @@ public class PlayNhacadapter extends RecyclerView.Adapter<PlayNhacadapter.ViewHo
             txtcasi = itemView.findViewById(R.id.textviewplaytencasi);
             txtindex = itemView.findViewById(R.id.textviewplaynhacindex);
             txttenbaihat = itemView.findViewById(R.id.textviewplaynhactenbaihat);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mangbaihat.get(getPosition()).getHinhbaihat().length() > 0){
-                        Fragment_Dia_Nhac fragment_dia_nhac = (Fragment_Dia_Nhac) PlayNhacActivity.adapterpager.getItem(1);
-                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(getPosition()).getHinhbaihat());
-                        PlayNhacMp3(mangbaihat.get(getPosition()).getLinkbaihat());
-                        toolbar.setTitle(mangbaihat.get(getPosition()).getTenbaihat());
-                    }
-
-                }
-            });
         }
     }
-    public void PlayNhacMp3(String url){
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepareAsync();
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.start();
-                }
-            });
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

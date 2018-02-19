@@ -27,7 +27,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
     }
     class ViewHolder{
         TextView txttenplaylist;
-        ImageView imgbackground,imgplaylist,imgplay;
+        ImageView imgbackground,imgplaylist;
     }
 
     @NonNull
@@ -40,7 +40,6 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             viewHolder = new ViewHolder();
             viewHolder.txttenplaylist = convertView.findViewById(R.id.textviewtenplaylist);
             viewHolder.imgbackground = convertView.findViewById(R.id.imageviewbackgroundplaylist);
-            viewHolder.imgplay = convertView.findViewById(R.id.imageviewbuttonplaylist);
             viewHolder.imgplaylist = convertView.findViewById(R.id.imageviewplaylist);
             convertView.setTag(viewHolder);
         }else {

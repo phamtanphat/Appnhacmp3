@@ -16,14 +16,6 @@
             android:id="@+id/imageviewdanhsachcacplaylist"
             android:layout_width="180dp"
             android:layout_height="180dp" />
-        <ImageView
-            android:layout_gravity="bottom|right"
-            android:id="@+id/imageviewplaydanhsachcacplaylist"
-            android:layout_margin="7dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/iconplaybanner"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
     </FrameLayout>
 
     <TextView

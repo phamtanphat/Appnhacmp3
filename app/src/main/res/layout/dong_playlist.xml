@@ -40,13 +40,5 @@
         android:textSize="13sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/imageviewbuttonplaylist"
-        android:layout_alignRight="@id/imageviewbackgroundplaylist"
-        android:layout_alignBottom="@id/imageviewplaylist"
-        android:src="@drawable/iconplaybanner"
-        android:scaleType="fitXY"
-        android:layout_width="35dp"
-        android:layout_height="30dp" />
 
 </RelativeLayout>

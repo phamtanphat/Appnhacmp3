@@ -51,12 +51,11 @@ public class DanhsachcacplaylistAdapter extends RecyclerView.Adapter<Danhsachcac
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imghinhnen,imgiconplay;
+        ImageView imghinhnen;
         TextView txttenplaylist;
         public ViewHolder(View itemView) {
             super(itemView);
             imghinhnen = itemView.findViewById(R.id.imageviewdanhsachcacplaylist);
-            imgiconplay = itemView.findViewById(R.id.imageviewplaydanhsachcacplaylist);
             txttenplaylist = itemView.findViewById(R.id.textviewtendanhsachcacplaylist);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -69,28 +69,25 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         if (theLoai != null && !theLoai.getTenTheLoai().equals("")) {
             setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
             GetDataTheLoai(theLoai.getIdTheLoai());
-            eventClick();
         }
         if (playlist != null && !playlist.getTen().equals("")) {
             setValueInView(playlist.getTen(), playlist.getHinhPlaylist());
             GetDataPlaylist(playlist.getIdPlaylist());
-            eventClick();
         }
         if (album != null && !album.getTenAlbum().equals("")) {
             setValueInView(album.getTenAlbum(), album.getHinhanhAlbum());
             GetDataAlbum(album.getIdAlbum());
-            eventClick();
         }
         if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
             setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             GetDataQuangcao(quangcao.getIdQuangcao());
-            eventClick();
         }
 
 
     }
 
     private void eventClick() {
+        floatingActionButton.setEnabled(true);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +109,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -132,6 +130,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -153,6 +152,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -192,6 +192,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachcakhuc.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachcakhuc.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -220,6 +221,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
         toolbar = findViewById(R.id.toolbardanhsach);
         floatingActionButton = findViewById(R.id.floatingactionbuttondanhsach);
+        floatingActionButton.setEnabled(false);
         imgdanhsachcakhuc = findViewById(R.id.imageviewdanhsachcakhuc);
         recyclerViewdanhsachcakhuc = findViewById(R.id.recyclerViewdanhsachbaihat);
     }

@@ -51,12 +51,11 @@ public class DanhsachtheloaitheochudeAdapter extends RecyclerView.Adapter<Danhsa
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imghinhnen,imgiconplay;
+        ImageView imghinhnen;
         TextView txttentheloai;
         public ViewHolder(View itemView) {
             super(itemView);
             imghinhnen = itemView.findViewById(R.id.imageviewttheloaithechude);
-            imgiconplay = itemView.findViewById(R.id.imageviewplayttheloaithechude);
             txttentheloai = itemView.findViewById(R.id.textviewtentheloaithechude);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

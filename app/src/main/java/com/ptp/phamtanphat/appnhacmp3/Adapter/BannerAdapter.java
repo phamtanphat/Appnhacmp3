@@ -46,7 +46,6 @@ public class BannerAdapter extends PagerAdapter {
 
         ImageView imgbackgroundbanner = view.findViewById(R.id.imageviewbackgroundbanner);
         ImageView imgsongbanner = view.findViewById(R.id.imageviewbanner);
-        ImageView imgplaybanner = view.findViewById(R.id.imageviewplaybanner);
         TextView txttitlesongbanner = view.findViewById(R.id.textvewtitlebannerbaihat);
         TextView txtlyricsongbanner = view.findViewById(R.id.textviewloibaihatbanner);
 

@@ -52,15 +52,7 @@
                 android:textSize="13sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ImageView
-                android:layout_centerInParent="true"
-                android:id="@+id/imageviewplaybanner"
-                android:layout_marginTop="3dp"
-                android:layout_alignParentRight="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/iconplaybanner"
-                android:layout_width="35dp"
-                android:layout_height="30dp" />
+
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

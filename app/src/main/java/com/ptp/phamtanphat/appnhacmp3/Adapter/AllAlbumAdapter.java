@@ -52,12 +52,11 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imghinhnen,imgiconplay;
+        ImageView imghinhnen;
         TextView txttenplaylist;
         public ViewHolder(View itemView) {
             super(itemView);
             imghinhnen = itemView.findViewById(R.id.imageviewallalbum);
-            imgiconplay = itemView.findViewById(R.id.imageviewplayallalbum);
             txttenplaylist = itemView.findViewById(R.id.textviewtenallalbum);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

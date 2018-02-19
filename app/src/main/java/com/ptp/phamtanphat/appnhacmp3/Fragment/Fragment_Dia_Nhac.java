@@ -25,45 +25,29 @@ public class Fragment_Dia_Nhac extends Fragment {
     View view;
     CircleImageView circleImageView;
     ObjectAnimator imageviewobjectanimator;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_dia_nhac,container,false);
+        view = inflater.inflate(R.layout.fragment_dia_nhac, container, false);
         circleImageView = view.findViewById(R.id.imageviewcirclemp3);
         imageviewobjectanimator = ObjectAnimator.ofFloat(circleImageView,
                 "rotation", 0f, 360f);
         imageviewobjectanimator.setDuration(10000);
         imageviewobjectanimator.setRepeatCount(ValueAnimator.INFINITE);
         imageviewobjectanimator.setRepeatMode(ValueAnimator.RESTART);
+
         imageviewobjectanimator.setInterpolator(new LinearInterpolator());
         return view;
     }
-    public void PlayDiaNhac(String hinhanh){
+
+    public void PlayDiaNhac(String hinhanh) {
         Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
         imageviewobjectanimator.start();
+
     }
-    public void PauseDiaNhac(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            imageviewobjectanimator.pause();
-        }
-    }
-    public void ResumeDiaNhac(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            imageviewobjectanimator.resume();
-        }
-    }
-    public void SetImageCirCle(String hinhanh){
-        Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
-    }
-    public void NextOrPreDiaNhac(String hinhanh){
-        if (imageviewobjectanimator != null){
-            imageviewobjectanimator.cancel();
-            imageviewobjectanimator.start();
-            SetImageCirCle(hinhanh);
-        }else {
-            imageviewobjectanimator.start();
-            SetImageCirCle(hinhanh);
-        }
-    }
+
+
+
 
 }
