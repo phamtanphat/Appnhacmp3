@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -110,60 +111,63 @@ public class PlayNhacActivity extends AppCompatActivity {
         imgnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mediaPlayer!= null){
-                   if (mediaPlayer.isPlaying()) {
-                       mediaPlayer.stop();
-                   }else {
-                       mediaPlayer.stop();
-                   }
-                }
+                if (mangbaihat.size() > 0) {
+                    if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
+                        if (mediaPlayer.isPlaying()) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                        }
+                    }
+                    if (position < (mangbaihat.size())) {
+                        position++;
 
-                    if (mangbaihat.size() > 0) {
-
-                        if (position < (mangbaihat.size())) {
-                            position++;
-
-                            if (position > (mangbaihat.size() - 1)) {
-                                position = 0;
-                            }
-
-                            if (repeat == true) {
-                                position -= 1;
-                            }
-                            if (checkrandom == true) {
-                                Random random = new Random();
-                                int index = random.nextInt(mangbaihat.size());
-                                if (index == position) {
-                                    position = index - 1;
-                                }
-                                position = index;
-
-                            }
-
-                            mediaPlayer = new MediaPlayer();
-                            PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
-                            imgplay.setImageResource(R.drawable.iconpause);
-                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                            TimeSong();
-                            UpdateTime();
+                        if (position > (mangbaihat.size() - 1)) {
+                            position = 0;
                         }
 
+                        if (repeat == true) {
+                            position -= 1;
+                        }
+                        if (checkrandom == true) {
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if (index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
+
+                        }
+
+                        mediaPlayer = new MediaPlayer();
+                        PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        UpdateTime();
+                        imgpre.setClickable(false);
+                        imgnext.setClickable(false);
+                        Handler handler1 = new Handler();
+                        handler1.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgnext.setClickable(true);
+                                imgpre.setClickable(true);
+                            }
+                        },5000);
                     }
 
-
-
+                }
             }
         });
         imgpre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                }
-                if (mangbaihat.size() > 0) {
 
+                if (mangbaihat.size() > 0) {
+                    if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
                     if (position < (mangbaihat.size())) {
                         position--;
                         if (position < 0) {
@@ -185,12 +189,20 @@ public class PlayNhacActivity extends AppCompatActivity {
                         PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
                         fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                        TimeSong();
                         UpdateTime();
 
                     }
-
                 }
+                imgpre.setClickable(false);
+                imgnext.setClickable(false);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgnext.setClickable(true);
+                        imgpre.setClickable(true);
+                    }
+                },5000);
             }
         });
         sktime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -213,7 +225,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkrandom == false) {
-                    if (repeat == true){
+                    if (repeat == true) {
                         repeat = false;
                         imgrandom.setImageResource(R.drawable.iconshuffled);
                         imgrepeat.setImageResource(R.drawable.iconrepeat);
@@ -231,7 +243,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (repeat == false) {
-                    if (checkrandom == true){
+                    if (checkrandom == true) {
                         checkrandom = false;
                         imgrepeat.setImageResource(R.drawable.iconsyned);
                         imgrandom.setImageResource(R.drawable.iconsuffle);
@@ -274,7 +286,8 @@ public class PlayNhacActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(mangbaihat.get(0).getTenbaihat());
             PlayNhacMp3(mangbaihat.get(0).getLinkbaihat());
         }
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
     }
 
@@ -312,14 +325,27 @@ public class PlayNhacActivity extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);
-            mediaPlayer.prepareAsync();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(final MediaPlayer mp) {
-                    mp.start();
+                    CountDownTimer countDownTimer = new CountDownTimer(300, 100) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            mp.start();
+                            TimeSong();
+                        }
+                    };
+                    countDownTimer.start();
+
 
                 }
             });
+            mediaPlayer.prepareAsync();
 
 
         } catch (IOException e) {
@@ -334,17 +360,20 @@ public class PlayNhacActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition() > 50) {
-                    SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
-                    txtTotalTime.setText(dinhDangGio.format(mediaPlayer.getDuration()));
-                    // gán max skSong = tổng thời gian bài hát
-                    sktime.setMax(mediaPlayer.getDuration());
-                    nextbaihat = true;
-                    handlerTImeSOng.removeCallbacks(this);
+                if (mediaPlayer != null) {
+                    if (mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition() > 50) {
+                        SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
+                        txtTotalTime.setText(dinhDangGio.format(mediaPlayer.getDuration()));
+                        // gán max skSong = tổng thời gian bài hát
+                        sktime.setMax(mediaPlayer.getDuration());
+                        nextbaihat = true;
+                        handlerTImeSOng.removeCallbacks(this);
 
-                } else {
-                    handlerTImeSOng.postDelayed(this, 1000);
+                    } else {
+                        handlerTImeSOng.postDelayed(this, 1000);
+                    }
                 }
+
             }
         }, 2000);
 
@@ -366,7 +395,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            if ((mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition()) < 500) {
+                            if ((mp.getDuration() - mp.getCurrentPosition()) < 500) {
                                 position++;
                                 if (mangbaihat.size() > 1) {
                                     if (position > mangbaihat.size() - 1) {
