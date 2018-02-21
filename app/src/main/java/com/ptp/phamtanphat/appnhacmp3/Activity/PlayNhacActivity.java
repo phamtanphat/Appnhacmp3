@@ -61,7 +61,6 @@ public class PlayNhacActivity extends AppCompatActivity {
     boolean repeat = false;
     boolean checkrandom = false;
     boolean nextbaihat = false;
-    int bufferupdate = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +89,6 @@ public class PlayNhacActivity extends AppCompatActivity {
 
             }
         }, 500);
-        if (isNetworkConnected() == true){
             imgplay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -224,7 +222,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
             });
-        }
+
 
         imgrandom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -361,10 +359,8 @@ public class PlayNhacActivity extends AppCompatActivity {
                         }
                     };
                     if (percent <100){
-                        Log.d("BBBB",percent + "");
                         handler1.postDelayed(runnable,1000);
                     }else if (percent == 100){
-                        Log.d("BBBB",percent + "");
                         if (handler1 != null){
                             handler1.removeCallbacks(runnable);
                         }
@@ -426,34 +422,16 @@ public class PlayNhacActivity extends AppCompatActivity {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             if ((mp.getDuration() - mp.getCurrentPosition()) < 500 && (mp.getDuration() - mp.getDuration()) >0) {
-                                position++;
-                                if (mangbaihat.size() > 1) {
-                                    if (position > mangbaihat.size() - 1) {
-                                        position = 0;
+                                Log.d("CCC","Position"  +position);
+                                CountinuteMp3();
+                            }else {
+                                Handler handler1 = new Handler();
+                                handler1.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CountinuteMp3();
                                     }
-                                    if (mediaPlayer.isPlaying()) {
-                                        mediaPlayer.stop();
-                                    }
-                                    if (repeat == true) {
-                                        position -= 1;
-                                    }
-                                    if (checkrandom == true) {
-                                        Random random = new Random();
-                                        int index = random.nextInt(mangbaihat.size());
-                                        if (index == position) {
-                                            position = index - 1;
-                                        }
-                                        position = index;
-
-                                    }
-                                    Log.d("CCC","Position"  +position);
-                                    mediaPlayer = new MediaPlayer();
-                                    fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                                    PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
-                                    getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                                    TimeSong();
-                                    nextbaihat = false;
-                                }
+                                },2000);
                             }
                         }
                     });
@@ -468,6 +446,36 @@ public class PlayNhacActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
+    }
+    public void CountinuteMp3(){
+        position++;
+        if (mangbaihat.size() > 1) {
+            if (position > mangbaihat.size() - 1) {
+                position = 0;
+            }
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            if (repeat == true) {
+                position -= 1;
+            }
+            if (checkrandom == true) {
+                Random random = new Random();
+                int index = random.nextInt(mangbaihat.size());
+                if (index == position) {
+                    position = index - 1;
+                }
+                position = index;
+
+            }
+
+            mediaPlayer = new MediaPlayer();
+            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+            PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+            TimeSong();
+            nextbaihat = false;
+        }
     }
 }
 
