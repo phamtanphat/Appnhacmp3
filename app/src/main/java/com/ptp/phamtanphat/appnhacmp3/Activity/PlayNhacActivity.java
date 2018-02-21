@@ -1,9 +1,13 @@
 package com.ptp.phamtanphat.appnhacmp3.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -57,7 +61,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     boolean repeat = false;
     boolean checkrandom = false;
     boolean nextbaihat = false;
-
+    int bufferupdate = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,141 +90,142 @@ public class PlayNhacActivity extends AppCompatActivity {
 
             }
         }, 500);
+        if (isNetworkConnected() == true){
+            imgplay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        imgplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                    imgplay.setImageResource(R.drawable.iconplay);
-                } else {
-                    if (mediaPlayer.isLooping()) {
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                    }
-                    mediaPlayer.start();
-                    imgplay.setImageResource(R.drawable.iconpause);
-                }
-                TimeSong();
-                UpdateTime();
-
-
-            }
-        });
-        imgnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mangbaihat.size() > 0) {
-                    if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
-                        if (mediaPlayer.isPlaying()) {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.pause();
+                        imgplay.setImageResource(R.drawable.iconplay);
+                    } else {
+                        if (mediaPlayer.isLooping()) {
                             mediaPlayer.stop();
                             mediaPlayer.release();
                         }
-                    }
-                    if (position < (mangbaihat.size())) {
-                        position++;
-
-                        if (position > (mangbaihat.size() - 1)) {
-                            position = 0;
-                        }
-
-                        if (repeat == true) {
-                            position -= 1;
-                        }
-                        if (checkrandom == true) {
-                            Random random = new Random();
-                            int index = random.nextInt(mangbaihat.size());
-                            if (index == position) {
-                                position = index - 1;
-                            }
-                            position = index;
-
-                        }
-
-                        mediaPlayer = new MediaPlayer();
-                        PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                        mediaPlayer.start();
                         imgplay.setImageResource(R.drawable.iconpause);
-                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                        UpdateTime();
-                        imgpre.setClickable(false);
-                        imgnext.setClickable(false);
-                        Handler handler1 = new Handler();
-                        handler1.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                imgnext.setClickable(true);
-                                imgpre.setClickable(true);
-                            }
-                        },5000);
                     }
+                    TimeSong();
+                    UpdateTime();
+
 
                 }
-            }
-        });
-        imgpre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (mangbaihat.size() > 0) {
-                    if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                    }
-                    if (position < (mangbaihat.size())) {
-                        position--;
-                        if (position < 0) {
-                            position = mangbaihat.size() - 1;
-                        }
-                        if (repeat == true) {
-                            position += 1;
-                        }
-                        if (checkrandom == true) {
-                            Random random = new Random();
-                            int index = random.nextInt(mangbaihat.size());
-                            if (index == position) {
-                                position = index - 1;
+            });
+            imgnext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mangbaihat.size() > 0) {
+                        if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.stop();
+                                mediaPlayer.release();
                             }
-                            position = index;
-
                         }
-                        mediaPlayer = new MediaPlayer();
-                        PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
-                        fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
-                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
-                        UpdateTime();
+                        if (position < (mangbaihat.size())) {
+                            position++;
+
+                            if (position > (mangbaihat.size() - 1)) {
+                                position = 0;
+                            }
+
+                            if (repeat == true) {
+                                position -= 1;
+                            }
+                            if (checkrandom == true) {
+                                Random random = new Random();
+                                int index = random.nextInt(mangbaihat.size());
+                                if (index == position) {
+                                    position = index - 1;
+                                }
+                                position = index;
+
+                            }
+                            mediaPlayer = new MediaPlayer();
+                            PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                            imgplay.setImageResource(R.drawable.iconpause);
+                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                            UpdateTime();
+                            imgpre.setClickable(false);
+                            imgnext.setClickable(false);
+                            Handler handler1 = new Handler();
+                            handler1.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imgnext.setClickable(true);
+                                    imgpre.setClickable(true);
+                                }
+                            },5000);
+                        }
 
                     }
                 }
-                imgpre.setClickable(false);
-                imgnext.setClickable(false);
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgnext.setClickable(true);
-                        imgpre.setClickable(true);
+            });
+            imgpre.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (mangbaihat.size() > 0) {
+                        if (mediaPlayer.isPlaying() || mediaPlayer.isLooping() || mediaPlayer != null || mediaPlayer == null) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                        }
+                        if (position < (mangbaihat.size())) {
+                            position--;
+                            if (position < 0) {
+                                position = mangbaihat.size() - 1;
+                            }
+                            if (repeat == true) {
+                                position += 1;
+                            }
+                            if (checkrandom == true) {
+                                Random random = new Random();
+                                int index = random.nextInt(mangbaihat.size());
+                                if (index == position) {
+                                    position = index - 1;
+                                }
+                                position = index;
+
+                            }
+                            mediaPlayer = new MediaPlayer();
+                            PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
+                            fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
+                            getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                            UpdateTime();
+
+                        }
                     }
-                },5000);
-            }
-        });
-        sktime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    imgpre.setClickable(false);
+                    imgnext.setClickable(false);
+                    Handler handler1 = new Handler();
+                    handler1.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgnext.setClickable(true);
+                            imgpre.setClickable(true);
+                        }
+                    },5000);
+                }
+            });
+            sktime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-            }
+                }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
 
-            }
+                }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress());
-            }
-        });
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    mediaPlayer.seekTo(seekBar.getProgress());
+                }
+            });
+        }
+
         imgrandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -325,23 +330,48 @@ public class PlayNhacActivity extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                @Override
+//                public void onPrepared(final MediaPlayer mp) {
+//                    CountDownTimer countDownTimer = new CountDownTimer(300, 100) {
+//                        @Override
+//                        public void onTick(long millisUntilFinished) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onFinish() {
+//
+//                        }
+//                    };
+//                    countDownTimer.start();
+//
+//
+//                }
+//            });
+            mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
                 @Override
-                public void onPrepared(final MediaPlayer mp) {
-                    CountDownTimer countDownTimer = new CountDownTimer(300, 100) {
+                public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                    Handler handler1 = new Handler();
+                    final Handler finalHandler = handler1;
+                    Runnable runnable = new Runnable() {
                         @Override
-                        public void onTick(long millisUntilFinished) {
-
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            mp.start();
-                            TimeSong();
+                        public void run() {
+                            finalHandler.postDelayed(this,1000);
                         }
                     };
-                    countDownTimer.start();
+                    if (percent <100){
+                        Log.d("BBBB",percent + "");
+                        handler1.postDelayed(runnable,1000);
+                    }else if (percent == 100){
+                        Log.d("BBBB",percent + "");
+                        if (handler1 != null){
+                            handler1.removeCallbacks(runnable);
+                        }
 
+                        mp.start();
+                        TimeSong();
+                    }
 
                 }
             });
@@ -395,7 +425,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            if ((mp.getDuration() - mp.getCurrentPosition()) < 500) {
+                            if ((mp.getDuration() - mp.getCurrentPosition()) < 500 && (mp.getDuration() - mp.getDuration()) >0) {
                                 position++;
                                 if (mangbaihat.size() > 1) {
                                     if (position > mangbaihat.size() - 1) {
@@ -416,6 +446,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                                         position = index;
 
                                     }
+                                    Log.d("CCC","Position"  +position);
                                     mediaPlayer = new MediaPlayer();
                                     fragment_dia_nhac.PlayDiaNhac(mangbaihat.get(position).getHinhbaihat());
                                     PlayNhacMp3(mangbaihat.get(position).getLinkbaihat());
@@ -433,6 +464,10 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
         }, 100);
     }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        return cm.getActiveNetworkInfo() != null;
+    }
 }
 

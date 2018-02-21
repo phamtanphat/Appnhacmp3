@@ -1,11 +1,13 @@
 package com.ptp.phamtanphat.appnhacmp3.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -66,22 +68,27 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
-        if (theLoai != null && !theLoai.getTenTheLoai().equals("")) {
-            setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
-            GetDataTheLoai(theLoai.getIdTheLoai());
+        if (isNetworkConnected() == true){
+            if (theLoai != null && !theLoai.getTenTheLoai().equals("")) {
+                setValueInView(theLoai.getTenTheLoai(), theLoai.getHinhTheLoai());
+                GetDataTheLoai(theLoai.getIdTheLoai());
+            }
+            if (playlist != null && !playlist.getTen().equals("")) {
+                setValueInView(playlist.getTen(), playlist.getHinhPlaylist());
+                GetDataPlaylist(playlist.getIdPlaylist());
+            }
+            if (album != null && !album.getTenAlbum().equals("")) {
+                setValueInView(album.getTenAlbum(), album.getHinhanhAlbum());
+                GetDataAlbum(album.getIdAlbum());
+            }
+            if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
+                setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
+                GetDataQuangcao(quangcao.getIdQuangcao());
+            }
+        }else {
+            Toast.makeText(this, "Loi Connect!!", Toast.LENGTH_SHORT).show();
         }
-        if (playlist != null && !playlist.getTen().equals("")) {
-            setValueInView(playlist.getTen(), playlist.getHinhPlaylist());
-            GetDataPlaylist(playlist.getIdPlaylist());
-        }
-        if (album != null && !album.getTenAlbum().equals("")) {
-            setValueInView(album.getTenAlbum(), album.getHinhanhAlbum());
-            GetDataAlbum(album.getIdAlbum());
-        }
-        if (quangcao != null && !quangcao.getTenBaiHat().equals("")) {
-            setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
-            GetDataQuangcao(quangcao.getIdQuangcao());
-        }
+
 
 
     }
@@ -248,5 +255,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 album = intent.getParcelableExtra("album");
             }
         }
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 }
